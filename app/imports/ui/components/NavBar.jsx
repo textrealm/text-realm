@@ -17,8 +17,7 @@ class NavBar extends React.Component {
               <Image size="mini" src="/images/textrealmlogo.png"/>
             </Menu.Item>
             {this.props.currentUser === '' ? (
-                <Menu.Item className="NavBarAbout" as={NavLink} activeClassName="active" exact to="/add"
-                           key='add'>About</Menu.Item>
+                <Menu.Item as={NavLink} activeClassName="" exact to="/about"> About/FAQ </Menu.Item>
             ) : ''}
             {this.props.currentUser ? (
                 [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Textbook</Menu.Item>,
