@@ -1,5 +1,6 @@
 body {
     background-image: url('/images/uh-manoa-campus-center.jpg') !important;
+    background-size: auto;
 }
 
 .backdrop {
