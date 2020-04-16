@@ -9,15 +9,29 @@ class AboutFAQ extends React.Component {
 
           <Grid.Column>
             <h1>About</h1>
-            <p>TextRealm is a web application where UH students can easily buy and sell their textbooks to other UH students.
-			This application was developed as a team by Chan Ung Jeong, Sang Nguyen, Sola Takahashi, and Sophia Elize Cruz.
-			With this application, students can login to a personal account (by signing up for an account), and fill our their profile as they see fit.
-			The user can buy textbooks by searching for textbooks based on a couple of their properties.
-			We aim to make this application provide students with an enjoyable experience in dealing with textbooks.</p>
-			<h1> FAQ </h1>
-			<p> To be completed. </p>
-          </Grid.Column>
+            <p>TextRealm is an application which allows UHM students to avoid the hassle of buying and selling textbooks from the bookstore, and allows students to buy 
+			and sell their textbooks directly with other UHM students registered on this site. Our site allows registered users to rate other registered users based on their 
+			buying/selling experience to guarantee that you can confidently and easily buy and sell your textbooks.</p>
+			<h1> Frequently Asked Questions </h1>
+			<p> 
+			Q: Where do I begin?
+			<br></br>
+			<br></br>
 
+A: Registered users can sign-in in here. //this will be a link later
+<br></br>
+If you are not a registered user, you can register here. //this will be also be a link
+<br></br>
+<br></br>
+
+Q: How do I sell my textbooks?
+<br></br>
+<br></br>
+
+A: Click on the ‘Sell A Textbook!’ option in the menu bar, which will direct you to a page where you must fill in the 
+required information about the textbook that you plan to sell. You must be logged in to be able to sell a textbook. 
+</p>
+          </Grid.Column>
         </Grid>
     );
   }
