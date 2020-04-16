@@ -2,3 +2,11 @@
   background-color: #3B7A57 !important;
 }
 
+body {
+    background-image: url('/images/uh-manoa-campus-center.jpg') !important;
+}
+
+.backdrop {
+    text-shadow: 5px 5px 5px #000000;
+}
+
