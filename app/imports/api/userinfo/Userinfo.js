@@ -10,6 +10,8 @@ const UserInfoSchema = new SimpleSchema({
   name: String,
   email: String,
   id: Number,
+  image: String,
+  description: String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
