@@ -30,11 +30,11 @@ class SellATextbook extends React.Component {
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Sell A Textbook</Header>
+            <Header inverted as="h2" textAlign="center">Sell A Textbook</Header>
             <AutoForm ref={ref => { fRef = ref; }} schema={BookSchema} onSubmit={data => this.submit(data, fRef)} >
               <Segment>
                 <TextField name='title'/>
-                <NumField name='isbn number' decimal={true}/>
+                <NumField name='isbn' decimal={true}/>
                 <TextField name='author'/>
                 <TextField name='image'/>
                 <SelectField name='condition'/>

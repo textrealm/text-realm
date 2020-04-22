@@ -30,10 +30,10 @@ class EditEntry extends React.Component {
         <Grid container centered>
           <Grid.Column>
             <Header as="h2" textAlign="center">Edit Entry</Header>
-            <AutoForm schema={BookSchema} onSubmit={data => this.submit(data)} model={this.props.doc}>
+            <AutoForm schema={ BookSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='title'/>
-                <NumField name='ISBN' decimal={true} />
+                <NumField name='isbn' decimal={true} />
                 <TextField name='image'/>
                 <TextField name='author'/>
                 <SelectField name='condition'/>
