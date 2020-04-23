@@ -31,7 +31,7 @@ class SellATextbook extends React.Component {
         <Grid container centered>
           <Grid.Column>
             <Header inverted as="h2" textAlign="center">Sell A Textbook</Header>
-            <AutoForm ref={ref => { fRef = ref; }} schema={BookSchema} onSubmit={data => this.submit(data, fRef)} >
+            <AutoForm ref={ref => { fRef = ref; }} schema={ BookSchema } onSubmit={data => this.submit(data, fRef)} >
               <Segment>
                 <TextField name='title'/>
                 <NumField name='isbn' decimal={true}/>
