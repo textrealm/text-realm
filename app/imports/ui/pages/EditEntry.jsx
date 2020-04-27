@@ -13,8 +13,8 @@ class EditEntry extends React.Component {
 
   /** On successful submit, insert the data. */
   submit(data) {
-    const { title, isbn, image, author, condition, _id } = data;
-    Book.update(_id, { $set: { title, isbn, image, author, condition } }, (error) => (error ?
+    const { title, ISBN, image, author, cost, yearPublished, condition, _id } = data;
+    Book.update(_id, { $set: { title, ISBN, image, author, cost, yearPublished, condition } }, (error) => (error ?
         swal('Error', error.message, 'error') :
         swal('Success', 'Item updated successfully', 'success')));
   }
@@ -33,9 +33,11 @@ class EditEntry extends React.Component {
             <AutoForm schema={ BookSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='title'/>
-                <NumField name='isbn' decimal={true} />
+                <NumField name='ISBN' decimal={true} />
+                <NumField name='cost' decimal={true} />
                 <TextField name='image'/>
                 <TextField name='author'/>
+                <TextField name='yearPublished' />
                 <SelectField name='condition'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>

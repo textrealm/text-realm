@@ -12,6 +12,8 @@ const BookSchema = new SimpleSchema({
   image: String,
   author: String,
   owner: String,
+  cost: Number,
+  yearPublished: String,
   condition: {
     type: String,
     allowedValues: ['excellent', 'good', 'fair', 'poor'],
