@@ -11,9 +11,9 @@ class SellATextbook extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { title, isbn, image, author, condition } = data;
+    const { title, ISBN, image, author, cost, condition } = data;
     const owner = Meteor.user().username;
-    Book.insert({ title, isbn, image, author, condition, owner },
+    Book.insert({ title, ISBN, image, author, cost, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -27,16 +27,19 @@ class SellATextbook extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
+    let addStyle = { marginBottom: '10px' };
     return (
-        <Grid container centered>
+        <Grid style={addStyle} container centered>
           <Grid.Column>
-            <Header inverted as="h2" textAlign="center">Sell A Textbook</Header>
+            <Header as="h2" textAlign="center">Sell A Textbook</Header>
             <AutoForm ref={ref => { fRef = ref; }} schema={ BookSchema } onSubmit={data => this.submit(data, fRef)} >
               <Segment>
                 <TextField name='title'/>
-                <NumField name='isbn' decimal={true}/>
+                <NumField name='ISBN' decimal={true}/>
+                <NumField name='cost' decimal={true}/>
                 <TextField name='author'/>
                 <TextField name='image'/>
+                <TextField name='yearPublished'/>
                 <SelectField name='condition'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
