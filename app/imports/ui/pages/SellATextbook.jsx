@@ -11,9 +11,9 @@ class SellATextbook extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { title, ISBN, image, author, cost, condition } = data;
+    const { title, ISBN, image, author, cost, yearPublished, condition } = data;
     const owner = Meteor.user().username;
-    Book.insert({ title, ISBN, image, author, cost, condition, owner },
+    Book.insert({ title, ISBN, image, author, cost, yearPublished, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
