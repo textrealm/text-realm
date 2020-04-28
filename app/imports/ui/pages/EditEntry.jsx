@@ -33,7 +33,7 @@ class EditEntry extends React.Component {
             <AutoForm schema={ BookSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='title'/>
-                <NumField name='ISBN' decimal={true} />
+                <NumField name='ISBN' decimal={false} />
                 <NumField name='cost' decimal={true} />
                 <TextField name='image'/>
                 <TextField name='author'/>
