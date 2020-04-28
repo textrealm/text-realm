@@ -11,3 +11,8 @@ body {
     text-shadow: 5px 5px 5px #000000;
 }
 
+.margin-message {
+  margin-top: 20px;
+  margin-bottom: 240px;
+  width: 100%;
+}
