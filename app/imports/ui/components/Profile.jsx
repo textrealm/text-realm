@@ -22,6 +22,9 @@ class Profile extends React.Component {
               {this.props.profileinfo.description}
             </Card.Description>
           </Card.Content>
+		  <Card.Content extra>
+            <Link to={`/edit/${this.props.profileinfo._id}`}>Edit</Link>
+          </Card.Content>
         </Card>
     );
   }
