@@ -71,9 +71,11 @@ export default class Signin extends React.Component {
                 <Form.Button content="Submit"/>
               </Segment>
             </Form>
-            <Message>
-              <Link to="/signup">Click here to Register</Link>
-            </Message>
+            <div className={"margin-message"}>
+              <Message>
+                <Link to="/signup">Click here to Register</Link>
+              </Message>
+            </div>
             {this.state.error === '' ? (
               ''
             ) : (
