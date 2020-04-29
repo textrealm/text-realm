@@ -33,11 +33,7 @@ class BookProfile extends React.Component {
                         </Card.Meta>
                         <br/>
                         <Card.Description>
-                            <Popup>
-                                content: {this.props.book.description}
-                                on='click'
-                                trigger={<Button content='View More' />}
-                            </Popup>
+                            {this.props.book.description}
                         </Card.Description>
                         <br/>
                         <Card.Meta>
@@ -50,6 +46,9 @@ class BookProfile extends React.Component {
                         <Card.Meta>
                             Year Published: {this.props.book.yearPublished}
                         </Card.Meta>
+                        <Card.Content extra>
+                            <Link to={this.props.userinfo.email}>Contact Seller</Link>
+                        </Card.Content>
                         <Card.Content extra>
                             <Link to={`/editBook/${this.props.userinfo._id}`}>Edit</Link>
                         </Card.Content>
