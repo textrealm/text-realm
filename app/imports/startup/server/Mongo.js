@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Book } from '../../api/book/Book.js';
+import { UserInfo } from '../../api/userinfo/Userinfo.js';
 
 /* eslint-disable no-console */
 
@@ -15,4 +16,8 @@ if (Book.find().count() === 0) {
     console.log('Creating default books.');
     Meteor.settings.defaultBooks.map(data => addBook(data));
   }
+
+function addData(data) {
+  console.log(`  Adding: ${data.name} (${data.owner})`);
+  UserInfo.insert(data);
 }

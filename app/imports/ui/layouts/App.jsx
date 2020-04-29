@@ -11,6 +11,7 @@ import ListTextbooks from '../pages/ListTextbooks';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import SellATextbook from '../pages/SellATextbook';
 import EditEntry from '../pages/EditEntry';
+import AddProfile from '../pages/AddProfile';
 import AboutFAQ from '../pages/AboutFAQ';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -32,6 +33,7 @@ class App extends React.Component {
               <ProtectedRoute path="/list" component={ListTextbooks}/>
               <ProtectedRoute path="/add" component={SellATextbook}/>
               <ProtectedRoute path="/editBook/:_id" component={EditEntry}/>
+              <ProtectedRoute path="/profile" component={AddProfile}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>

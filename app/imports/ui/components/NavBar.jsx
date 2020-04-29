@@ -12,39 +12,44 @@ class NavBar extends React.Component {
     const menuStyle = { marginBottom: '10px' };
     return (
 
-          <Menu className="manoa-green" style={menuStyle} attached="top" borderless inverted>
-            <Menu.Item as={NavLink} activeClassName="" exact to="/">
-              <Image size="mini" src="/images/textrealmlogo.png"/>
-            </Menu.Item>
+        <Menu className="manoa-green" style={menuStyle} attached="top" borderless inverted>
+          <Menu.Item as={NavLink} activeClassName="" exact to="/">
+            <Image size="mini" src="/images/textrealmlogo.png"/>
+          </Menu.Item>
+          {this.props.currentUser === '' ? (
+              <Menu.Item as={NavLink} activeClassName="" exact to="/about"> About/FAQ </Menu.Item>
+          ) : ''}
+          {this.props.currentUser ? (
+              [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Sell A Textbook</Menu.Item>,
+              ]
+                  [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Textbook</Menu.Item>,
+                  <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List
+                    Textbooks</Menu.Item>,
+                  <Menu.Item as={NavLink} activeClassName="active" exact to="/profile" key='profile'> Add
+                    Profile </Menu.Item>]
+          ) : ''}
+          {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Show Listings
+                (Admin)</Menu.Item>
+          ) : ''}
+          <Menu.Item position="right">
             {this.props.currentUser === '' ? (
-                <Menu.Item as={NavLink} activeClassName="" exact to="/about"> About/FAQ </Menu.Item>
-            ) : ''}
-            {this.props.currentUser ? (
-                [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Sell A Textbook</Menu.Item>,
-                  ]
-            ) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Show Listings
-                  (Admin)</Menu.Item>
-            ) : ''}
-            <Menu.Item position="right">
-              {this.props.currentUser === '' ? (
-                  [<Menu.Item key='search'>
-                    <Input icon='search' placeholder='Search'/>
-                  </Menu.Item>,
-                    <Menu.Item key='login' as={NavLink} exact to="/signin"> Login </Menu.Item>,
-                    <Menu.Item key='signup' as={NavLink} exact to="/signup">Sign
-                      Up</Menu.Item>]
-              ) : (
-                  <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
-                    <Dropdown.Menu>
-                      <Dropdown.Item icon="sign out" text="Profile" as={NavLink} exact to="/signout"/>
-                      <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
-                    </Dropdown.Menu>
-                  </Dropdown>
-              )}
-            </Menu.Item>
-          </Menu>
+                [<Menu.Item key='search'>
+                  <Input icon='search' placeholder='Search'/>
+                </Menu.Item>,
+                  <Menu.Item key='login' as={NavLink} exact to="/signin"> Login </Menu.Item>,
+                  <Menu.Item key='signup' as={NavLink} exact to="/signup">Sign
+                    Up</Menu.Item>]
+            ) : (
+                <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
+                  <Dropdown.Menu>
+                    <Dropdown.Item icon="sign out" text="Profile" as={NavLink} exact to="/signout"/>
+                    <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
+                  </Dropdown.Menu>
+                </Dropdown>
+            )}
+          </Menu.Item>
+        </Menu>
     );
   }
 }
