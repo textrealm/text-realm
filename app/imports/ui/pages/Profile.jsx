@@ -11,12 +11,12 @@ class Profile extends React.Component {
   render() {
     return (
         <Card centered>
-          <Card.Content>
             <Image
                 floated='left'
                 size='medium'
                 src={this.props.userinfo.image}
             />
+          <Card.Content>
             <Card.Header>Name: {this.props.userinfo.name} </Card.Header>
             <Card.Meta>Email: {this.props.userinfo.email}</Card.Meta>
 			<Card.Meta>UH ID Number: {this.props.userinfo.id}</Card.Meta>
@@ -33,7 +33,7 @@ class Profile extends React.Component {
 }
 /** Require a document to be passed to this component. */
 Profile.propTypes = {
-    userinfo: PropTypes.array.isRequired,
+    userinfo: PropTypes.object.isRequired,
     ready: PropTypes.bool.isRequired,
 };
 
