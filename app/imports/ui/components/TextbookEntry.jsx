@@ -47,6 +47,9 @@ class TextbookEntry extends React.Component {
                     <Card.Meta>
                         Year Published: {this.props.book.yearPublished}
                     </Card.Meta>
+                    <Card.Content extra>
+                        <Link to={`/editBook/${this.props.userinfo._id}`}>Edit</Link>
+                    </Card.Content>
                 </Card.Content>
 
                 {/*<Card.Content extra>*/}
