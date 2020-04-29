@@ -95,9 +95,11 @@ class Signup extends React.Component {
                 <Form.Button content="Submit"/>
               </Segment>
             </Form>
-            <Message>
-              Already have an account? Login <Link to="/signin">here</Link>
-            </Message>
+            <div className={"signup-margin-message"}>
+              <Message>
+                Already have an account? Login <Link to="/signin">here</Link>
+              </Message>
+            </div>
             {this.state.error === '' ? (
               ''
             ) : (
