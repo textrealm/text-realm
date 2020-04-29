@@ -3,8 +3,8 @@ import {Image, Card, Button, Confirm, Popup} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import {withTracker} from 'meteor/react-meteor-data';
-import {Book} from "../../api/book/Book";
-import {UserInfo} from "../../api/userinfo/Userinfo";
+import { Book } from "../../api/book/Book";
+import { UserInfo } from "../../api/userinfo/Userinfo";
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class TextbookEntry extends React.Component {
@@ -48,18 +48,7 @@ class TextbookEntry extends React.Component {
                         Year Published: {this.props.book.yearPublished}
                     </Card.Meta>
                 </Card.Content>
-                <Card.Content extra>
-                    <Button onClick={this.hasClicked}>
-                        Delete
-                    </Button>
-                    <Confirm
-                        open={this.state.hasClicked}
-                        onCancel={this.closed}
-                        onConfirm={() => this.delete(this.props.book._id)}/>
-                    <Button basic color='green' as={NavLink} exact to={{pathname:`/editentry/${id}`, select: this.props.book}}>
-                        Edit Entry
-                    </Button>
-                </Card.Content>
+
                 {/*<Card.Content extra>*/}
                 {/*    <Book owner={this.props.book.owner} contactId={this.props.book._id}/>*/}
                 {/*</Card.Content>*/}
