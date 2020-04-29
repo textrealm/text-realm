@@ -7,7 +7,15 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { UserInfo, UserInfoSchema } from '../../api/userinfo/Userinfo';
+import SimpleSchema from "simpl-schema";
 
+const formSchema = new SimpleSchema({
+  name: String,
+  email: String,
+  id: Number,
+  image: String,
+  description: String,
+});
 /** Renders the Page for editing a single document. */
 class EditProfile extends React.Component {
 
@@ -30,7 +38,7 @@ class EditProfile extends React.Component {
         <Grid container centered>
           <Grid.Column>
             <Header as="h2" textAlign="center">Edit Profile</Header>
-            <AutoForm schema={UserInfoSchema} onSubmit={data => this.submit(data)} model={this.props.doc}>
+            <AutoForm schema={ formSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='name'/>
 				<TextField name='email'/>
@@ -39,7 +47,6 @@ class EditProfile extends React.Component {
 				<TextField name='description'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
-                <HiddenField name='owner' />
               </Segment>
             </AutoForm>
           </Grid.Column>

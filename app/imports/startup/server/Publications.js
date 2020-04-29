@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { UserInfo } from '../../api/userinfo/Userinfo'
+import { UserInfo } from '../../api/userinfo/Userinfo';
 
 Meteor.publish('UserInfo', function publish() {
   if (this.userId) {
