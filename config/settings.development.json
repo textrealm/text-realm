@@ -1,6 +1,5 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" }
   ],
 
@@ -14,5 +13,10 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    ],
+
+  "defaultProfile": [
+    { "name": "John", "email":  "john@foo.com", "id": "9682228", "image": "https://react.semantic-ui.com/images/wireframe/image.png",
+      "description": "I am a student", "owner": "john@foo.com"}
   ]
 }
