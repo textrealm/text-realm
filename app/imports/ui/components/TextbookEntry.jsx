@@ -1,16 +1,23 @@
 import React from 'react';
-import {Image, Card, Button} from 'semantic-ui-react';
+import {Image, Card, Button, Confirm, Popup} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {withTracker} from 'meteor/react-meteor-data';
 import {Book} from "../../api/book/Book";
 import {UserInfo} from "../../api/userinfo/Userinfo";
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class TextbookEntry extends React.Component {
+    deleteEntry(id) {
+        Book.delete(id);
+        this.setState({click: false});
+    }
+    state = { click: false };
+    hasClicked = () => this.setState({ click: true });
+    closed = () => this.setState({ click: false });
     render() {
         return (
-            <Card fluid>
+            <Card>
                 <Image src='https://en.wikipedia.org/wiki/Introduction_to_Algorithms#/media/File:Clrs3.jpeg'
                        floated='left' size='large'/>
                 <Card.Content>
@@ -23,29 +30,34 @@ class TextbookEntry extends React.Component {
                     </Card.Meta>
                     <br/>
                     <Card.Description>
-                        Description: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                        unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                        publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        <Popup>
+                            content: {this.props.book.description}
+                            on='click'
+                            trigger={<Button content='View More' />}
+                        </Popup>
                     </Card.Description>
                     <br/>
                     <Card.Meta>
-                        Cost:
+                        Cost: {this.props.book.cost}
                     </Card.Meta>
                     <br/>
                     <Card.Meta>
                         Condition: {this.props.book.condition}
                     </Card.Meta>
+                    <Card.Meta>
+                        Year Published: {this.props.book.yearPublished}
+                    </Card.Meta>
                 </Card.Content>
                 <Card.Content extra>
-                    <Button onClick={this.open}>
-                        <Link to={this.props.userinfo.email}>Contact Seller</Link>
+                    <Button onClick={this.hasClicked}>
+                        Delete
                     </Button>
-                    <Button onClick={this.open}>
-                        <Link to={`/edit/${this.props.book._id}`}>Edit Entry</Link>
+                    <Confirm
+                        open={this.state.hasClicked}
+                        onCancel={this.closed}
+                        onConfirm={() => this.delete(this.props.book._id)}/>
+                    <Button basic color='green' as={NavLink} exact to={{pathname:`/editentry/${id}`, select: this.props.book}}>
+                        Edit Entry
                     </Button>
                 </Card.Content>
                 {/*<Card.Content extra>*/}
