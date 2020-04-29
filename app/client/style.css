@@ -1,7 +1,3 @@
-.navbar-color {
-  background-color: #3B7A57 !important;
-}
-
 body {
     background-image: url('/images/uh-manoa-campus-center.jpg') !important;
     background-size: auto;
@@ -17,3 +13,8 @@ body {
   margin-bottom: 240px;
   width: 100%;
 }
+
+.manoa-green {
+  background-color: #3B7A57 !important;
+}
+
