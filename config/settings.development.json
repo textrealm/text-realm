@@ -4,8 +4,14 @@
   ],
 
   "defaultBooks": [
-    {"title":  "Introduction to Algorithms, 3rd Edition", "ISBN":  "99988827", "image":  "https://en.wikipedia.org/wiki/Introduction_to_Algorithms#/media/File:Clrs3.jpeg",
-    "author":  "Thomas Cormen", "owner":  "john@foo.com", "cost":  "100", "yearPublished":  "1989", "condition":  "good"}
+    { "title":  "Introduction to Algorithms, 3rd Edition",
+      "ISBN":  "99988827",
+      "image":  "https://en.wikipedia.org/wiki/Introduction_to_Algorithms#/media/File:Clrs3.jpeg",
+      "author":  "Thomas Cormen",
+      "owner":  "john@foo.com",
+      "cost":  "100",
+      "yearPublished":  "1989",
+      "condition":  "good"}
   ],
 
   "defaultData": [
