@@ -4,7 +4,7 @@ import { Container, Header, Loader, Card } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Book } from '../../api/book/Book';
-import TextbookEntry from "../components/TextbookEntry";
+import TextbookEntryPublic from "../components/TextbookEntryPublic";
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListTextbooks extends React.Component {
@@ -20,7 +20,7 @@ class ListTextbooks extends React.Component {
             <Container>
                 <Header as="h2" textAlign="center" inverted>Search Results</Header>
                 <Card.Group>
-                    {this.props.book.map((book, index) => <TextbookEntry key={ index }
+                    {this.props.book.map((book, index) => <TextbookEntryPublic key={ index }
                                                                                   book={ book }
                     />)}
                 </Card.Group>
