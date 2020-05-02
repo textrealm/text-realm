@@ -44,11 +44,8 @@ class TextbookEntry extends React.Component {
                     </Card.Meta>
                     <br/>
                     <Card.Content extra>
-                        <Button basic inverted color='green'>
-                            <Link to={`/editBook/${this.props.book._id}`}>Edit</Link>
-                        </Button>
-                        <Button basic inverted color='red'>
-                            <Link to={`/editBook/${this.props.book._id}`}>Edit</Link>
+                        <Button basic color='green'>
+                            <Link to={`/editBook/${this.props.book._id}`}>View More</Link>
                         </Button>
                     </Card.Content>
                 </Card.Content>
