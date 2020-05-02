@@ -13,6 +13,7 @@ const BookSchema = new SimpleSchema({
   author: String,
   owner: String,
   cost: Number,
+  description: String,
   yearPublished: String,
   condition: {
     type: String,

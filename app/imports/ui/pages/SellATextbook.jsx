@@ -13,6 +13,7 @@ const formSchema = new SimpleSchema({
   image: String,
   author: String,
   cost: { type: Number, min: 0 },
+  description: String,
   yearPublished: String,
   condition: {
     type: String,
@@ -26,9 +27,9 @@ class SellATextbook extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { title, ISBN, image, author, cost, yearPublished, condition } = data;
+    const { title, ISBN, image, author, cost, yearPublished, description, condition } = data;
     const owner = Meteor.user().username;
-    Book.insert({ title, ISBN, image, author, cost, yearPublished, condition, owner },
+    Book.insert({ title, ISBN, image, author, cost, yearPublished, description, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -55,6 +56,7 @@ class SellATextbook extends React.Component {
                 <TextField name='author'/>
                 <TextField name='image'/>
                 <TextField name='yearPublished'/>
+                <LongTextField name='description'/>
                 <SelectField name='condition'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
