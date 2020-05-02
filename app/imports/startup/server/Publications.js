@@ -21,7 +21,7 @@ Meteor.publish('Book', function publish() {
 
 Meteor.publish('BookAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Books.find();
+    return Book.find();
   }
   return this.ready();
 });

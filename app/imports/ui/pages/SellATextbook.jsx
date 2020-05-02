@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
+import {AutoForm, ErrorsField, LongTextField, NumField, SelectField, SubmitField, TextField} from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
@@ -13,6 +13,7 @@ const formSchema = new SimpleSchema({
   image: String,
   author: String,
   cost: { type: Number, min: 0 },
+  description: String,
   yearPublished: String,
   condition: {
     type: String,
@@ -26,9 +27,9 @@ class SellATextbook extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { title, ISBN, image, author, cost, yearPublished, condition } = data;
+    const { title, ISBN, image, author, cost, yearPublished, description, condition } = data;
     const owner = Meteor.user().username;
-    Book.insert({ title, ISBN, image, author, cost, yearPublished, condition, owner },
+    Book.insert({ title, ISBN, image, author, cost, yearPublished, description, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -54,6 +55,7 @@ class SellATextbook extends React.Component {
                 <NumField name='cost' decimal={true}/>
                 <TextField name='author'/>
                 <TextField name='image'/>
+                <LongTextField name='description'/>
                 <TextField name='yearPublished'/>
                 <SelectField name='condition'/>
                 <SubmitField value='Submit'/>
