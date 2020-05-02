@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import {AutoForm, ErrorsField, LongTextField, NumField, SelectField, SubmitField, TextField} from 'uniforms-semantic';
+import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
@@ -20,7 +20,7 @@ const formSchema = new SimpleSchema({
     allowedValues: ['excellent', 'good', 'fair', 'poor'],
     defaultValue: 'good',
   },
-  });
+});
 
 /** Renders the Page for adding a document. */
 class SellATextbook extends React.Component {
@@ -30,14 +30,14 @@ class SellATextbook extends React.Component {
     const { title, ISBN, image, author, cost, yearPublished, description, condition } = data;
     const owner = Meteor.user().username;
     Book.insert({ title, ISBN, image, author, cost, yearPublished, description, condition, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
-        }
-      });
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            swal('Success', 'Item added successfully', 'success');
+            formRef.reset();
+          }
+        });
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
@@ -55,8 +55,8 @@ class SellATextbook extends React.Component {
                 <NumField name='cost' decimal={true}/>
                 <TextField name='author'/>
                 <TextField name='image'/>
-                <LongTextField name='description'/>
                 <TextField name='yearPublished'/>
+                <LongTextField name='description'/>
                 <SelectField name='condition'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
