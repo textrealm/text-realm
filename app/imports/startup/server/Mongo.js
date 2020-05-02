@@ -11,7 +11,7 @@ function addBook(book) {
 
 /** Initialize the collection if empty. */
 if (Book.find().count() === 0) {
-  if (Meteor.settings.defaultData) {
+  if (Meteor.settings.defaultBooks) {
     console.log('Creating default books.');
     Meteor.settings.defaultBooks.map(data => addBook(data));
   }

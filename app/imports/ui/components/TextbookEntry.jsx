@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Card, Button, Popup} from 'semantic-ui-react';
+import { Image, Card, Button, Popup } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { Book } from "../../api/book/Book";
@@ -22,7 +22,6 @@ class TextbookEntry extends React.Component {
                     <Card.Header>
                         {this.props.book.title}
                     </Card.Header>
-                    <br/>
                     <Card.Meta>
                         Author(s): {this.props.book.author}
                     </Card.Meta>
@@ -46,12 +45,9 @@ class TextbookEntry extends React.Component {
                         Year Published: {this.props.book.yearPublished}
                     </Card.Meta>
                     <Card.Content extra>
-                        <Link to={`/editBook/${this.props.userinfo._id}`}>Edit</Link>
+                        <Link to={`/editBook/${this.props.book._id}`}>Edit</Link>
                     </Card.Content>
                 </Card.Content>
-                {/*<Card.Content extra>*/}
-                {/*    <Book owner={this.props.book.owner} contactId={this.props.book._id}/>*/}
-                {/*</Card.Content>*/}
             </Card>
         );
     }
@@ -59,26 +55,6 @@ class TextbookEntry extends React.Component {
 
 TextbookEntry.propTypes = {
    book: PropTypes.object.isRequired,
-   userinfo: PropTypes.object.isRequired,
 };
 
 export default withRouter(TextbookEntry);
-
-// /** Require a document to be passed to this component. */
-// TextbookEntry.propTypes = {
-//     book: PropTypes.object.isRequired,
-//     userinfo: PropTypes.object.isRequired,
-//     ready: PropTypes.bool.isRequired
-// };
-//
-// /** Wrap this component in withRouter since we use the <Link> React Router element. */
-// export default withTracker(() => {
-//     // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-//     const subscription = Meteor.subscribe('Book');
-//     const usersub = Meteor.subscribe('UserInfo');
-//     return {
-//         book: Book.find({}).fetch(),
-//         userinfo: UserInfo.find({}).fetch(),
-//         ready: subscription.ready() && usersub.ready(),
-//     };
-// })(TextbookEntry);

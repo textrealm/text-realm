@@ -8,7 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListTextbooks from '../pages/ListTextbooks';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import ListTextbooksAdmin from '../pages/ListTextbooksAdmin';
 import SellATextbook from '../pages/SellATextbook';
 import EditEntry from '../pages/EditEntry';
 import Profile from '../pages/Profile';
@@ -37,7 +37,7 @@ class App extends React.Component {
               <ProtectedRoute path="/editBook/:_id" component={EditEntry}/>
               <ProtectedRoute path="/profile" component={Profile}/>
               <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+              <AdminProtectedRoute path="/admin" component={ListTextbooksAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>
