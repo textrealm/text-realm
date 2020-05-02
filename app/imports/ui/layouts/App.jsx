@@ -36,7 +36,7 @@ class App extends React.Component {
               <ProtectedRoute path="/editBook/:_id" component={EditEntry}/>
               <ProtectedRoute path="/profile" component={Profile}/>
               <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+              <AdminProtectedRoute path="/admin" component={ListTextbooksAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>
