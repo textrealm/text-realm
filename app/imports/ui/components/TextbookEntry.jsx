@@ -1,10 +1,8 @@
 import React from 'react';
-import {Image, Card, Button, Confirm, Popup} from 'semantic-ui-react';
+import {Image, Card, Button, Popup} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import {withTracker} from 'meteor/react-meteor-data';
+import { withRouter, Link } from 'react-router-dom';
 import { Book } from "../../api/book/Book";
-import { UserInfo } from "../../api/userinfo/Userinfo";
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class TextbookEntry extends React.Component {
@@ -51,7 +49,6 @@ class TextbookEntry extends React.Component {
                         <Link to={`/editBook/${this.props.userinfo._id}`}>Edit</Link>
                     </Card.Content>
                 </Card.Content>
-
                 {/*<Card.Content extra>*/}
                 {/*    <Book owner={this.props.book.owner} contactId={this.props.book._id}/>*/}
                 {/*</Card.Content>*/}
@@ -60,21 +57,28 @@ class TextbookEntry extends React.Component {
     }
 }
 
-/** Require a document to be passed to this component. */
 TextbookEntry.propTypes = {
-    book: PropTypes.array.isRequired,
-    userinfo: PropTypes.array.isRequired,
-    ready: PropTypes.bool.isRequired
+   book: PropTypes.object.isRequired,
+   userinfo: PropTypes.object.isRequired,
 };
 
-/** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withTracker(() => {
-    // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-    const subscription = Meteor.subscribe('Book');
-    const usersub = Meteor.subscribe('UserInfo');
-    return {
-        book: Book.find({}).fetch(),
-        userinfo: UserInfo.find({}).fetch(),
-        ready: subscription.ready() && usersub.ready(),
-    };
-})(TextbookEntry);
+export default withRouter(TextbookEntry);
+
+// /** Require a document to be passed to this component. */
+// TextbookEntry.propTypes = {
+//     book: PropTypes.object.isRequired,
+//     userinfo: PropTypes.object.isRequired,
+//     ready: PropTypes.bool.isRequired
+// };
+//
+// /** Wrap this component in withRouter since we use the <Link> React Router element. */
+// export default withTracker(() => {
+//     // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+//     const subscription = Meteor.subscribe('Book');
+//     const usersub = Meteor.subscribe('UserInfo');
+//     return {
+//         book: Book.find({}).fetch(),
+//         userinfo: UserInfo.find({}).fetch(),
+//         ready: subscription.ready() && usersub.ready(),
+//     };
+// })(TextbookEntry);

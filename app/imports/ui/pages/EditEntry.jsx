@@ -6,9 +6,24 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { Book, BookSchema } from "../../api/book/Book";
+import { Book } from "../../api/book/Book";
+import SimpleSchema from "simpl-schema";
 
 /** Renders the Page for editing a single document. */
+const formSchema = new SimpleSchema({
+  title: String,
+  ISBN: Number,
+  image: String,
+  author: String,
+  cost: { type: Number, min: 0 },
+  yearPublished: String,
+  condition: {
+    type: String,
+    allowedValues: ['excellent', 'good', 'fair', 'poor'],
+    defaultValue: 'good',
+  },
+});
+
 class EditEntry extends React.Component {
 
   /** On successful submit, insert the data. */
@@ -30,7 +45,7 @@ class EditEntry extends React.Component {
         <Grid container centered>
           <Grid.Column>
             <Header as="h2" textAlign="center">Edit Entry</Header>
-            <AutoForm schema={ BookSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
+            <AutoForm schema={ formSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='title'/>
                 <NumField name='ISBN' decimal={false} />
@@ -41,7 +56,7 @@ class EditEntry extends React.Component {
                 <SelectField name='condition'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
-                <HiddenField name='owner' />
+                {/*<HiddenField name='owner' />*/}
               </Segment>
             </AutoForm>
           </Grid.Column>

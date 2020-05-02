@@ -33,7 +33,7 @@ class Profile extends React.Component {
 }
 /** Require a document to be passed to this component. */
 Profile.propTypes = {
-    userinfo: PropTypes.object.isRequired,
+    userinfo: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
 
