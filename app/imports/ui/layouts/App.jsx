@@ -8,7 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListTextbooks from '../pages/ListTextbooks';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import ListTextbooksAdmin from '../pages/ListTextbooksAdmin';
 import SellATextbook from '../pages/SellATextbook';
 import EditEntry from '../pages/EditEntry';
 import Profile from '../pages/Profile';

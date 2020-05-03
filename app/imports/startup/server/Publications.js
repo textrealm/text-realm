@@ -11,6 +11,13 @@ Meteor.publish('UserInfo', function publish() {
   return this.ready();
 });
 
+Meteor.publish('UserInfoAdmin', function publish() {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return UserInfo.find();
+  }
+  return this.ready();
+});
+
 Meteor.publish('Book', function publish() {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
@@ -21,7 +28,7 @@ Meteor.publish('Book', function publish() {
 
 Meteor.publish('BookAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Books.find();
+    return Book.find();
   }
   return this.ready();
 });

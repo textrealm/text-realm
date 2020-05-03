@@ -1,8 +1,7 @@
 import React from 'react';
-import {Image, Card, Button, Confirm, Popup} from 'semantic-ui-react';
+import {Image, Card, Button, Popup} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import {withTracker} from 'meteor/react-meteor-data';
+import {withTracker, Link} from 'meteor/react-meteor-data';
 import { Book } from "../../api/book/Book";
 import { UserInfo } from "../../api/userinfo/Userinfo";
 
@@ -48,13 +47,9 @@ class TextbookEntry extends React.Component {
                         Year Published: {this.props.book.yearPublished}
                     </Card.Meta>
                     <Card.Content extra>
-                        <Link to={`/editBook/${this.props.userinfo._id}`}>Edit</Link>
+                        <Link to={`/editBook/${this.props.book._id}`}>Edit</Link>
                     </Card.Content>
                 </Card.Content>
-
-                {/*<Card.Content extra>*/}
-                {/*    <Book owner={this.props.book.owner} contactId={this.props.book._id}/>*/}
-                {/*</Card.Content>*/}
             </Card>
         );
     }
@@ -62,8 +57,8 @@ class TextbookEntry extends React.Component {
 
 /** Require a document to be passed to this component. */
 TextbookEntry.propTypes = {
-    book: PropTypes.array.isRequired,
-    userinfo: PropTypes.array.isRequired,
+    book: PropTypes.object.isRequired,
+    userinfo: PropTypes.object.isRequired,
     ready: PropTypes.bool.isRequired
 };
 

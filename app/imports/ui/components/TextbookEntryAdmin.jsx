@@ -47,7 +47,7 @@ class TextbookEntryAdmin extends React.Component {
                         Year Published: {this.props.book.yearPublished}
                     </Card.Meta>
                     <Card.Content extra>
-                        <Link to={`/editBook/${this.props.userinfo._id}`}>Edit</Link>
+                        {this.props.userinfo.email}
                     </Card.Content>
                 </Card.Content>
             </Card>
