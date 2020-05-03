@@ -1,14 +1,15 @@
 import React from 'react';
 import { Image, Card, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Link, NavLink} from 'react-router-dom';
+import { Book } from "../../api/book/Book";
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class TextbookEntry extends React.Component {
     removeItem(docID) {
         let check = confirm("Do you really want to delete this textbook entry?");
         if (check === true) {
-            this.props.Contacts.remove(docID);
+            Book.remove(docID);
             swal('Success', 'Entry deleted successfully', 'success');
         } else {
             swal('Error', error.message, 'error');
@@ -48,7 +49,8 @@ class TextbookEntry extends React.Component {
                         <Button basic color='green'>
                             <Link to={`/editBook/${this.props.book._id}`}>Edit</Link>
                         </Button>
-                        <Button basic color='red' onClick={() => this.removeItem(this.props.book._id)}>
+                        <Button basic color='red'
+                                onClick={() => this.removeItem(this.props.book._id)}>
                             Delete
                         </Button>
                     </Card.Content>

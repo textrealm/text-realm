@@ -18,7 +18,7 @@ class ListTextbooks extends React.Component {
     renderPage() {
         return (
             <Container>
-                <Header as="h2" textAlign="center" inverted>Search Results</Header>
+                <Header as="h2" textAlign="center" >Search Results</Header>
                 <Card.Group>
                     {this.props.book.map((book, index) => <TextbookEntryPublic key={ index }
                                                                                   book={ book }

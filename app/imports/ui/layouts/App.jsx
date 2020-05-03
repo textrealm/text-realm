@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListTextbooks from '../pages/ListTextbooks';
 import ListTextbooksAdmin from '../pages/ListTextbooksAdmin';
+import BookProfile from "../pages/BookProfile";
 import SellATextbook from '../pages/SellATextbook';
 import EditEntry from '../pages/EditEntry';
 import Profile from '../pages/Profile';
@@ -35,6 +36,7 @@ class App extends React.Component {
               <ProtectedRoute path="/list" component={ListTextbooks}/>
               <ProtectedRoute path="/add" component={SellATextbook}/>
               <ProtectedRoute path="/editBook/:_id" component={EditEntry}/>
+                <ProtectedRoute path="/bookProfile/:_id" component={BookProfile}/>
               <ProtectedRoute path="/profile" component={Profile}/>
               <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
               <AdminProtectedRoute path="/admin" component={ListTextbooksAdmin}/>

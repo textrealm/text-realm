@@ -2,17 +2,9 @@ import React from 'react';
 import { Image, Card, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-import { Book } from "../../api/book/Book";
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class TextbookEntry extends React.Component {
-    deleteEntry(id) {
-        Book.delete(id);
-        this.setState({click: false});
-    }
-    state = { click: false };
-    hasClicked = () => this.setState({ click: true });
-    closed = () => this.setState({ click: false });
+class TextbookEntryPublic extends React.Component {
     render() {
         return (
             <Card>
@@ -44,9 +36,11 @@ class TextbookEntry extends React.Component {
                     </Card.Meta>
                     <br/>
                     <Card.Content extra>
-                        <Button basic color='green'>
-                            <Link to={`/editBook/${this.props.book._id}`}>View More</Link>
-                        </Button>
+                        {/*<Button basic color='green' as={NavLink} exact*/}
+                        {/*        to={{ pathname: '/bookProfile', select: this.props.book }}>*/}
+                        {/*    View More*/}
+                        {/*</Button>*/}
+                        <Link to={`/bookProfile/${this.props.book._id}`}>View More</Link>
                     </Card.Content>
                 </Card.Content>
             </Card>
@@ -54,8 +48,8 @@ class TextbookEntry extends React.Component {
     }
 }
 
-TextbookEntry.propTypes = {
+TextbookEntryPublic.propTypes = {
    book: PropTypes.object.isRequired,
 };
 
-export default withRouter(TextbookEntry);
+export default withRouter(TextbookEntryPublic);
