@@ -1,19 +1,20 @@
 import React from 'react';
-import {Image, Card, Button, Popup} from 'semantic-ui-react';
+import { Image, Card, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withTracker } from 'meteor/react-meteor-data';
+import { withRouter, Link } from 'react-router-dom';
 import { Book } from "../../api/book/Book";
-import { UserInfo } from "../../api/userinfo/Userinfo";
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class TextbookEntryAdmin extends React.Component {
-    deleteEntry(id) {
-        Book.delete(id);
-        this.setState({click: false});
+    removeItem(docID) {
+        let check = confirm("Do you really want to delete this textbook entry?");
+        if (check === true) {
+            Book.remove(docID);
+            swal('Success', 'Entry deleted successfully', 'success');
+        } else {
+            swal('Error', error.message, 'error');
+        }
     }
-    state = { click: false };
-    hasClicked = () => this.setState({ click: true });
-    closed = () => this.setState({ click: false });
     render() {
         return (
             <Card>
@@ -28,13 +29,9 @@ class TextbookEntryAdmin extends React.Component {
                         Author(s): {this.props.book.author}
                     </Card.Meta>
                     <br/>
-                    <Card.Description>
-                        <Popup>
-                            content: {this.props.book.description}
-                            on='click'
-                            trigger={<Button content='View More' />}
-                        </Popup>
-                    </Card.Description>
+                    <Card.Meta>
+                        Description: {this.props.book.description}
+                    </Card.Meta>
                     <br/>
                     <Card.Meta>
                         Cost: {this.props.book.cost}
@@ -43,11 +40,19 @@ class TextbookEntryAdmin extends React.Component {
                     <Card.Meta>
                         Condition: {this.props.book.condition}
                     </Card.Meta>
+                    <br/>
                     <Card.Meta>
                         Year Published: {this.props.book.yearPublished}
                     </Card.Meta>
+                    <br/>
                     <Card.Content extra>
-                        {this.props.userinfo.email}
+                        <Button basic color='green'>
+                            <Link to={`/editBook/${this.props.book._id}`}>Edit</Link>
+                        </Button>
+                        <Button basic color='red'
+                                onClick={() => this.removeItem(this.props.book._id)}>
+                            Delete
+                        </Button>
                     </Card.Content>
                 </Card.Content>
             </Card>
@@ -55,21 +60,8 @@ class TextbookEntryAdmin extends React.Component {
     }
 }
 
-/** Require a document to be passed to this component. */
 TextbookEntryAdmin.propTypes = {
-    book: PropTypes.array.isRequired,
-    userinfo: PropTypes.array.isRequired,
-    ready: PropTypes.bool.isRequired
+    book: PropTypes.object.isRequired,
 };
 
-/** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withTracker(() => {
-    // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-    const subscription = Meteor.subscribe('BookAdmin');
-    const usersub = Meteor.subscribe('UserInfo');
-    return {
-        book: Book.find({}).fetch(),
-        userinfo: UserInfo.find({}).fetch(),
-        ready: subscription.ready() && usersub.ready(),
-    };
-})(TextbookEntryAdmin);
+export default withRouter(TextbookEntryAdmin);
