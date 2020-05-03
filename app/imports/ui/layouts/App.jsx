@@ -36,7 +36,7 @@ class App extends React.Component {
               <ProtectedRoute path="/list" component={ListTextbooks}/>
               <ProtectedRoute path="/add" component={SellATextbook}/>
               <ProtectedRoute path="/editBook/:_id" component={EditEntry}/>
-                <ProtectedRoute path="/bookProfile/:_id" component={BookProfile}/>
+              <ProtectedRoute path="/bookProfile/:_id" component={BookProfile}/>
               <ProtectedRoute path="/profile" component={Profile}/>
               <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
               <AdminProtectedRoute path="/admin" component={ListTextbooksAdmin}/>

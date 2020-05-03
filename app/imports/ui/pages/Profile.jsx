@@ -9,6 +9,7 @@ import TextbookEntry from "../components/TextbookEntry";
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class Profile extends React.Component {
+
     render() {
         return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
     }
@@ -31,12 +32,11 @@ class Profile extends React.Component {
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                    <Link to={`/edit/_.id${this.props.userinfo._id}`}>Edit</Link>
+                    <Link to={`/edit/${this.props.userinfo._id}`}>Edit</Link>
                 </Card.Content>
             </Card>
             <Card.Group centered>
                 {this.props.books.map((book, index) => <TextbookEntry
-                    className="profile-book"
                     key={index}
                     book={book}
                 />)}
@@ -47,13 +47,13 @@ class Profile extends React.Component {
 }
 /** Require a document to be passed to this component. */
 Profile.propTypes = {
-    userinfo: PropTypes.array.isRequired,
+    userinfo: PropTypes.object.isRequired,
     books: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withTracker(() => {
+export default withTracker(( ) => {
     // Get access to Book documents.
     const subscription = Meteor.subscribe('UserInfo');
     const booksub = Meteor.subscribe('Book');
