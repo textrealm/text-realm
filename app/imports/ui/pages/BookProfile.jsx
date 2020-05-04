@@ -1,9 +1,10 @@
 import React from 'react';
-import {Image, Card, Link, Grid } from 'semantic-ui-react';
+import { Image, Card, Link, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import {withTracker} from 'meteor/react-meteor-data';
-import { Book } from "../../api/book/Book";
-import { UserInfo } from "../../api/userinfo/Userinfo";
+import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import { Book } from '../../api/book/Book';
+import { UserInfo } from '../../api/userinfo/Userinfo';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class BookProfile extends React.Component {
@@ -46,9 +47,6 @@ class BookProfile extends React.Component {
                                 <Link to={`/editBook/${this.props.userinfo._id}`}>Edit</Link>
                             </Card.Content>
                         </Card.Content>
-                        {/*<Card.Content extra>*/}
-                        {/*    <Book owner={this.props.book.owner} contactId={this.props.book._id}/>*/}
-                        {/*</Card.Content>*/}
                     </Card>
                 </Grid.Column>
             </Grid>
@@ -61,7 +59,7 @@ class BookProfile extends React.Component {
 BookProfile.propTypes = {
     book: PropTypes.array.isRequired,
     userinfo: PropTypes.array.isRequired,
-    ready: PropTypes.bool.isRequired
+    ready: PropTypes.bool.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

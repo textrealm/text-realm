@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
-import Userinfo from '../../api/userinfo/Userinfo'
+import { UserInfo } from '../../api/userinfo/Userinfo';
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -17,19 +17,19 @@ class Signup extends React.Component {
   /** Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
-  }
+  };
 
   /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
     const { email, password, id, image, description } = this.state;
-    Userinfo.createUser({ email, username: email, password, id, image, description }, (err) => {
+    UserInfo.createUser({ email, username: email, password, id, image, description }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
         this.setState({ error: '', redirectToReferer: true });
       }
     });
-  }
+  };
 
   /** Display the signup form. Redirect to add page after successful registration and login. */
   render() {
@@ -85,8 +85,8 @@ class Signup extends React.Component {
                 />
                 <Form.TextArea
                     label="Description"
-                    icon={""}
-                    iconPosition={""}
+                    icon={''}
+                    iconPosition={''}
                     name="description"
                     placeholder="Password"
                     type="description"
@@ -95,7 +95,7 @@ class Signup extends React.Component {
                 <Form.Button content="Submit"/>
               </Segment>
             </Form>
-            <div className={"signup-margin-message"}>
+            <div className={'signup-margin-message'}>
               <Message>
                 Already have an account? Login <Link to="/signin">here</Link>
               </Message>

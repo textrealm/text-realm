@@ -42,7 +42,7 @@ class SellATextbook extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
-    let addStyle = { marginBottom: '10px' };
+    const addStyle = { marginBottom: '10px' };
     return (
         <Grid style={addStyle} container centered>
           <Grid.Column>

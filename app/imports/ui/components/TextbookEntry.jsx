@@ -1,19 +1,24 @@
 import React from 'react';
-import {Image, Card, Button, Popup} from 'semantic-ui-react';
+import { Image, Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import {withTracker, Link} from 'meteor/react-meteor-data';
-import { Book } from "../../api/book/Book";
-import { UserInfo } from "../../api/userinfo/Userinfo";
+import { Meteor } from 'meteor/meteor';
+import { withTracker, Link } from 'meteor/react-meteor-data';
+import { Book } from '../../api/book/Book';
+import { UserInfo } from '../../api/userinfo/Userinfo';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class TextbookEntry extends React.Component {
     deleteEntry(id) {
         Book.delete(id);
-        this.setState({click: false});
+        this.setState({ click: false });
     }
+
     state = { click: false };
+
     hasClicked = () => this.setState({ click: true });
+
     closed = () => this.setState({ click: false });
+
     render() {
         return (
             <Card>
@@ -27,14 +32,6 @@ class TextbookEntry extends React.Component {
                     <Card.Meta>
                         Author(s): {this.props.book.author}
                     </Card.Meta>
-                    <br/>
-                    <Card.Description>
-                        <Popup>
-                            content: {this.props.book.description}
-                            on='click'
-                            trigger={<Button content='View More' />}
-                        </Popup>
-                    </Card.Description>
                     <br/>
                     <Card.Meta>
                         Cost: {this.props.book.cost}
@@ -59,7 +56,7 @@ class TextbookEntry extends React.Component {
 TextbookEntry.propTypes = {
     book: PropTypes.object.isRequired,
     userinfo: PropTypes.object.isRequired,
-    ready: PropTypes.bool.isRequired
+    ready: PropTypes.bool.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

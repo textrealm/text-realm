@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { Book, BookSchema } from "../../api/book/Book";
+import { Book, BookSchema } from '../../api/book/Book';
 
 /** Renders the Page for editing a single document. */
 class EditEntry extends React.Component {

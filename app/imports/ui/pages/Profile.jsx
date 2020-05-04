@@ -3,7 +3,8 @@ import { Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
-import { UserInfo } from "../../api/userinfo/Userinfo";
+import { Meteor } from 'meteor/meteor';
+import { UserInfo } from '../../api/userinfo/Userinfo';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class Profile extends React.Component {
@@ -19,12 +20,12 @@ class Profile extends React.Component {
           <Card.Content>
             <Card.Header>Name: {this.props.userinfo.name} </Card.Header>
             <Card.Meta>Email: {this.props.userinfo.email}</Card.Meta>
-			<Card.Meta>UH ID Number: {this.props.userinfo.id}</Card.Meta>
+            <Card.Meta>UH ID Number: {this.props.userinfo.id}</Card.Meta>
             <Card.Description>
               Description: {this.props.userinfo.description}
             </Card.Description>
           </Card.Content>
-		  <Card.Content extra>
+          <Card.Content extra>
             <Link to={`/edit/${this.props.userinfo._id}`}>Edit</Link>
           </Card.Content>
         </Card>

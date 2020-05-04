@@ -1,13 +1,13 @@
 import React from 'react';
 import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, NumField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, NumField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { UserInfo, UserInfoSchema } from '../../api/userinfo/Userinfo';
-import SimpleSchema from "simpl-schema";
+import SimpleSchema from 'simpl-schema';
+import { UserInfo } from '../../api/userinfo/Userinfo';
 
 const formSchema = new SimpleSchema({
   name: String,
@@ -41,10 +41,10 @@ class EditProfile extends React.Component {
             <AutoForm schema={ formSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='name'/>
-				<TextField name='email'/>
+                <TextField name='email'/>
                 <NumField name='id' decimal={false}/>
-				<TextField name='image'/>
-				<TextField name='description'/>
+                <TextField name='image'/>
+                <TextField name='description'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>
