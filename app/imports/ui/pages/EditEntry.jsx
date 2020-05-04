@@ -30,7 +30,7 @@ class EditEntry extends React.Component {
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Edit Entry</Header>
+            <Header as="h2" inverted textAlign="center">Edit Entry</Header>
             <AutoForm schema={ BookSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='title'/>

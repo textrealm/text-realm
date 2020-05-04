@@ -47,7 +47,7 @@ class SellATextbook extends React.Component {
     return (
         <Grid style={addStyle} container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Sell A Textbook</Header>
+            <Header as="h2" inverted textAlign="center">Sell A Textbook</Header>
             <AutoForm ref={ref => { fRef = ref; }} schema={ formSchema } onSubmit={data => this.submit(data, fRef)} >
               <Segment>
                 <TextField name='title'/>

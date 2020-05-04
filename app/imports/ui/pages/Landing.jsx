@@ -5,8 +5,7 @@ import { Grid, Image, Header } from 'semantic-ui-react';
 class Landing extends React.Component {
   render() {
     return (
-        <Grid centered stackable={true} textAlign='center' container>
-
+        <Grid centered stackable={true} textAlign='center' className='manoa-bg'>
           <Grid.Column textAlign='center' width={8}>
             <Image size='huge' circular src='/images/textrealmlogo.png'/>
             <div className='backdrop'>

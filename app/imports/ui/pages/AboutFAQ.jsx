@@ -5,7 +5,7 @@ import { Grid } from 'semantic-ui-react';
 class AboutFAQ extends React.Component {
   render() {
     return (
-        <Grid verticalAlign='middle' textAlign='center' container>
+        <Grid verticalAlign='middle' textAlign='center' className='manoa-bg'>
 
           <Grid.Column>
             <h1>About</h1>
