@@ -33,9 +33,7 @@ class NavBar extends React.Component {
           ) : ''}
           <Menu.Item position="right">
             {this.props.currentUser === '' ? (
-                [<Menu.Item key='search'>
-                  <Input icon='search' placeholder='Search'/>
-                </Menu.Item>,
+                [
                   <Menu.Item key='login' as={NavLink} exact to="/signin"> Login </Menu.Item>,
                   <Menu.Item key='signup' as={NavLink} exact to="/signup">Sign
                     Up</Menu.Item>]
