@@ -51,8 +51,8 @@ class BookProfile extends React.Component {
                                 <br/>
                             </Card.Content>
                             <Card.Content extra>
-                              Contact/View More From The Seller At: <NavLink sellerid={ this.props.sellId }
-                                exact to={`/profile/${this.props.book.sellerid}`}><b>{this.props.book.owner}</b></NavLink>
+                              Contact/View More From The Seller At: <NavLink sellerId={ this.props.sellId }
+                                exact to={`/profile/${this.props.book.sellerId}`}><b>{this.props.book.owner}</b></NavLink>
                             </Card.Content>
                         </Card>
                     </Grid.Column>
@@ -64,7 +64,7 @@ class BookProfile extends React.Component {
 
 /** Require a document to be passed to this component. */
 BookProfile.propTypes = {
-    book: PropTypes.object,
+    book: PropTypes.object.isRequired,
     ready: PropTypes.bool.isRequired,
     sellId: PropTypes.string,
 };
@@ -74,9 +74,11 @@ export default withTracker(( { match }) => {
     const documentId = match.params._id;
     const subscription = Meteor.subscribe('Book');
     const useSub = Meteor.subscribe('UserInfo');
+    const getId = Meteor.user() ? Meteor.userId() : '';
+    const findOwn = getId ? getId.username : '';
     return {
         book: Book.findOne(documentId),
         ready: subscription.ready() && useSub.ready(),
-        sellId: Meteor.user() ? Meteor.userId() : '',
+        sellId: Book.findOne({ owner: findOwn }),
     };
 })(BookProfile);
