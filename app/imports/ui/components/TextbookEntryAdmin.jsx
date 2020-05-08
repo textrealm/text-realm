@@ -13,7 +13,7 @@ class TextbookEntryAdmin extends React.Component {
     render() {
         return (
             <Card>
-                <Image src='https://en.wikipedia.org/wiki/Introduction_to_Algorithms#/media/File:Clrs3.jpeg'
+                <Image src={this.props.book.image}
                        floated='left' size='large'/>
                 <Card.Content>
                     <Card.Header>
