@@ -19,7 +19,7 @@ class TextbookEntry extends React.Component {
     }
     render() {
         return (
-            <Card fluid>
+            <Card>
                 <Card.Content>
                     <Card.Content>
                         <Image src={this.props.book.image} width='350px' height='350px'/>
@@ -31,10 +31,6 @@ class TextbookEntry extends React.Component {
                     <br/>
                     <Card.Meta>
                         Author(s): {this.props.book.author}
-                    </Card.Meta>
-                    <br/>
-                    <Card.Meta>
-                        Description: {this.props.book.description}
                     </Card.Meta>
                     <br/>
                     <Card.Meta>

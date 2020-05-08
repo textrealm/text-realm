@@ -50,7 +50,7 @@ class Profile extends React.Component {
 }
 /** Require a document to be passed to this component. */
 Profile.propTypes = {
-    userinfo: PropTypes.object.isRequired,
+    userinfo: PropTypes.object,
     books: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
@@ -63,7 +63,7 @@ export default withTracker(({ match }) => {
     const booksub = Meteor.subscribe('Book');
     return {
         userinfo: UserInfo.findOne({ user: userId }),
-        books: Book.find({}).fetch(),
+        books: Book.find({ user: userId }).fetch(),
         ready: subscription.ready() && booksub.ready(),
     };
 })(Profile);
