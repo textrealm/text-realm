@@ -24,17 +24,17 @@ class Profile extends React.Component {
                         <Image
                             floated='right'
                             size='medium'
-                            src={this.props.userinfo.image}
+                            src={this.props.userInfo.image}
                         />
-                        <Card.Header>{this.props.userinfo.name} </Card.Header>
-                        <Card.Meta>Email: {this.props.userinfo.email}</Card.Meta>
-                        <Card.Meta>UH ID Number: {this.props.userinfo.id}</Card.Meta>
+                        <Card.Header>{this.props.userInfo.name} </Card.Header>
+                        <Card.Meta>Email: {this.props.userInfo.email}</Card.Meta>
+                        <Card.Meta>UH ID Number: {this.props.userInfo.id}</Card.Meta>
                         <Card.Meta>
-                            {this.props.userinfo.description}
+                            {this.props.userInfo.description}
                         </Card.Meta>
                     </Card.Content>
                     <Card.Content extra>
-                        <Link to={`/edit/${this.props.userinfo._id}`}>Edit</Link>
+                        <Link to={`/edit/${this.props.userInfo._id}`}>Edit</Link>
                     </Card.Content>
                 </Card>
                 <Card.Group centered>
@@ -50,7 +50,7 @@ class Profile extends React.Component {
 }
 /** Require a document to be passed to this component. */
 Profile.propTypes = {
-    userinfo: PropTypes.object,
+    userInfo: PropTypes.object,
     books: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
@@ -58,12 +58,13 @@ Profile.propTypes = {
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
 export default withTracker(({ match }) => {
     // Get access to Book documents.
-    let userId = match.params._id;
+    const userId = match.params._id;
+    const getUser = Meteor.users.findOne(userId);
     const subscription = Meteor.subscribe('UserInfo');
-    const booksub = Meteor.subscribe('Book');
+    const bookSub = Meteor.subscribe('Book');
     return {
-        userinfo: UserInfo.findOne({ user: userId }),
-        books: Book.find({ user: userId }).fetch(),
-        ready: subscription.ready() && booksub.ready(),
+        userInfo: UserInfo.findOne({ username: getUser }),
+        books: Book.find({ username: getUser }).fetch(),
+        ready: subscription.ready() && bookSub.ready(),
     };
 })(Profile);

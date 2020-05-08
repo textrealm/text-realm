@@ -2,37 +2,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { AutoForm, SubmitField, ErrorsField, TextField, LongTextField } from 'uniforms-semantic';
+import { Accounts } from 'meteor/accounts-base';
 import { UserInfo } from '../../api/userinfo/Userinfo';
+import SimpleSchema from 'simpl-schema';
 
+const formSchema = new SimpleSchema({
+    name: String,
+    email: String,
+    password: String,
+    id: Number,
+    image: String,
+    description: String,
+});
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
 class Signup extends React.Component {
+
   /** Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', id: 0, image: '', description: '', error: '', redirectToReferer: false };
+    this.state = {
+      error: '',
+      redirectToReferer: false
+    };
   }
 
-  /** Update the form controls each time the user interacts with them. */
-  handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
-  };
-
   /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
-  submit = () => {
-    const { email, password, id, image, description } = this.state;
-    UserInfo.createUser({ email, username: email, password, id, image, description }, (err) => {
+  submit = (data, formRef) => {
+    const { name, email, password, id, image, description } = data;
+    Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
+        UserInfo.insert({ name, email, id, image, description, owner: email });
         this.setState({ error: '', redirectToReferer: true });
+        formRef.reset();
       }
     });
   };
 
   /** Display the signup form. Redirect to add page after successful registration and login. */
   render() {
+    let fRef = null;
     const { from } = this.props.location.state || { from: { pathname: '/add' } };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
@@ -42,59 +55,54 @@ class Signup extends React.Component {
       <Container>
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
           <Grid.Column>
-            <Header as="h2" textAlign="center">
-              Register your account
+            <Header as="h2" textAlign="center" inverted>
+              Register Your Account
             </Header>
-            <Form onSubmit={this.submit}>
-              <Segment stacked>
-                <Form.Input
+            <AutoForm ref={ref => { fRef = ref; }} schema={formSchema} onSubmit={data => this.submit(data, fRef)} >              <Segment stacked>
+                <TextField
+                    label="Name"
+                    name="name"
+                    placeholder="Name"
+                />
+                <TextField
                   label="Email"
                   icon="user"
                   iconPosition="left"
                   name="email"
-                  type="email"
                   placeholder="E-mail address"
-                  onChange={this.handleChange}
                 />
-                <Form.Input
+                <TextField
                   label="School ID"
                   icon="id card"
                   iconPosition="left"
                   name="id"
                   placeholder="ID Number"
-                  type="id"
-                  onChange={this.handleChange}
                 />
-                <Form.Input
+                <TextField
                   label="Password"
                   icon="lock"
                   iconPosition="left"
                   name="password"
                   placeholder="Password"
-                  type="password"
-                  onChange={this.handleChange}
                 />
-                <Form.Input
+                <TextField
                     label="Image"
                     icon="image"
                     iconPosition="left"
                     name="image"
                     placeholder="Image URL"
-                    type="image URL"
-                    onChange={this.handleChange}
                 />
-                <Form.TextArea
+                <LongTextField
                     label="Description"
                     icon={""}
                     iconPosition={""}
                     name="description"
                     placeholder="Enter your bio..."
-                    type="description"
-                    onChange={this.handleChange}
                 />
-                <Form.Button content="Submit"/>
+                <SubmitField value='Submit' />
+                <ErrorsField/>
               </Segment>
-            </Form>
+            </AutoForm>
             <div className={"signup-margin-message"}>
               <Message>
                 Already have an account? Login <Link to="/signin">here</Link>
