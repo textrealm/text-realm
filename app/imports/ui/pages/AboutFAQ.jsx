@@ -5,9 +5,9 @@ import { Grid } from 'semantic-ui-react';
 class AboutFAQ extends React.Component {
   render() {
     return (
-        <Grid verticalAlign='middle' textAlign='center' className='manoa-bg'>
+        <Grid verticalAlign='middle' textAlign='center' className='manoa-green'>
 
-          <Grid.Column>
+          <Grid.Column centered width={9}>
             <h1>About</h1>
             <p>TextRealm is an application which allows UHM students to avoid the hassle of buying and selling textbooks
             from the bookstore, and allows students to buy and sell their textbooks directly with other UHM students

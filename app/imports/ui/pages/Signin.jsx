@@ -19,7 +19,7 @@ export default class Signin extends React.Component {
   /** Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
-  }
+  };
 
   /** Handle Signin submission using Meteor's account mechanism. */
   submit = () => {
@@ -31,7 +31,7 @@ export default class Signin extends React.Component {
         this.setState({ error: '', redirectToReferer: true });
       }
     });
-  }
+  };
 
   /** Render the signin form. */
   render() {
