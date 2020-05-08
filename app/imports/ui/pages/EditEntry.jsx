@@ -28,7 +28,7 @@ class EditEntry extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
     return (
-        <Grid container centered>
+        <Grid container inverted centered>
           <Grid.Column>
             <Header as="h2" inverted textAlign="center">Edit Entry</Header>
             <AutoForm schema={ BookSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>

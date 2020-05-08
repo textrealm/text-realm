@@ -9,7 +9,7 @@ class Landing extends React.Component {
           <Grid.Column textAlign='center' width={8}>
             <Image size='huge' circular src='/images/textrealmlogo.png'/>
             <div className='backdrop'>
-              <Header as='h1' inverted color='white'>The easy way for UH Manoa students to buy and sell their
+              <Header as='h1' inverted>The easy way for UH Manoa students to buy and sell their
                 textbooks.</Header>
             </div>
           </Grid.Column>

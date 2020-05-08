@@ -74,7 +74,7 @@ export default class Signin extends React.Component {
                 </Segment>
               </Form>
               <div className="margin-message">
-                <Message className="manoa-green" saturated>
+                <Message className="manoa-green">
                   <Link to="/signup">Click here to Register</Link>
                 </Message>
               </div>

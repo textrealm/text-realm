@@ -9,12 +9,12 @@ import { Book } from '../../api/book/Book';
 
 const formSchema = new SimpleSchema({
   title: String,
-  ISBN: Number,
+  ISBN: { type: Number, label: 'ISBN' },
   image: String,
   author: String,
   cost: { type: Number, min: 0 },
   description: String,
-  yearPublished: String,
+  yearPublished: { type: Number, label: 'Year Published', min: 0 },
   condition: {
     type: String,
     allowedValues: ['excellent', 'good', 'fair', 'poor'],
