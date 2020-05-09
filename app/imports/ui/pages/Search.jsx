@@ -86,12 +86,12 @@ class Search extends React.Component {
                 <Header as ="h2" textAlign="center">Search for textbooks based on author, ISBN, or title.</Header>
                 <AutoForm schema={formSchema} onSubmit={data => this.submit(data)} >
                     <Segment>
-                      <SearchComp letSearch={this.}
+                     
                         <SubmitField value='Submit'/>
                     </Segment>
                 </AutoForm>
                 <Card.Group style={{ paddingTop: '10px' }}>
-                    {this.state.{this.props.book.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
+                    {this.props.book.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
                 </Card.Group>
             </Container>
         );
