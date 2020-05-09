@@ -1,15 +1,67 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Loader, Segment, Container, Header, Card } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, NumField, SubmitField, TextField, SelectField } from 'uniforms-semantic';
+import { AutoForm, SubmitField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { Book, BookSchema } from '../../api/book/Book';
+import { Book } from '../../api/book/Book';
 
-/** Renders the Page for editing a single document. */
+
+// /** Renders the Page for editing a single document. */
+// class Search extends React.Component {
+// /** Create a schema to specify the structure of the data to appear in the form. */
+// const makeSchema = (allInterests) => new SimpleSchema({
+//   interests: { type: Array, label: 'Interests', optional: true },
+//   'interests.$': { type: String, allowedValues: allInterests },
+// });
+//
+// function getBookData(book) {
+//   const data = Book.findOne({ book });
+//   const title = _.pluck(ProfilesInterests.find({ profile: email }).fetch(), 'title');
+//   const ISBN = _.pluck(ProfilesProjects.find({ profile: email }).fetch(), 'ISBN');
+//   const author = _.pluck(ProfilesProjects.find({ profile: email }).fetch(), 'author');
+//   return _.extend({ }, data, { title, ISBN, author });
+// }
+//
+// /** Component for layout out a Profile Card. */
+// const MakeCard = (props) => (
+//     <Card>
+//       <Card.Content>
+//         <Image floated='right' size='mini' src={props.profile.picture} />
+//         <Card.Header>{props.profile.firstName} {props.profile.lastName}</Card.Header>
+//         <Card.Meta>
+//           <span className='date'>{props.profile.title}</span>
+//         </Card.Meta>
+//         <Card.Description>
+//           {props.profile.bio}
+//         </Card.Description>
+//       </Card.Content>
+//       <Card.Content extra>
+//         {_.map(props.profile.interests,
+//             (interest, index) => <Label key={index} size='tiny' color='teal'>{interest}</Label>)}
+//       </Card.Content>
+//       <Card.Content extra>
+//         <Header as='h5'>Projects</Header>
+//         {_.map(props.profile.projects, (project, index) => <Image key={index} size='mini' src={project}/>)}
+//       </Card.Content>
+//     </Card>
+// );
+//
+// /** Properties */
+// MakeCard.propTypes = {
+//   profile: PropTypes.object.isRequired,
+// };
+//
+
+/** Renders the Profile Collection as a set of Cards. */
 class Search extends React.Component {
+
+  constructor(props) {
+    super(props);
+   // this.state = { : [] };
+  }
 
   /** On successful submit, search for data. */
   submit(data) {
@@ -38,25 +90,18 @@ class Search extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
     return (
-        <Grid container centered>
-          <Grid.Column>
-            <Header as="h2" textAlign="center" inverted>Textbook Search</Header>
-            <AutoForm schema={BookSchema} onSubmit={data => this.submit(data)} model={this.props.books}>
-              <Segment>
-                <TextField name='title'/>
-                <TextField name='ISBN'/>
-                <TextField name='image'/>
-                <TextField name='author'/>
-                <TextField name='owner'/>
-                <NumField name='cost' decimal={false}/>
-                <NumField name='yearPublished' decimal={false}/>
-                <SelectField name='condition'/>
-                <SubmitField value='Submit'/>
-                <ErrorsField/>
-              </Segment>
-            </AutoForm>
-          </Grid.Column>
-        </Grid>
+        <Container>
+          <Header as="h1" textAlign="center">Search For Books</Header>
+          <AutoForm schema={formSchema} onSubmit={data => this.submit(data)} >
+            <Segment>
+              <MultiSelectField name='interests' showInlineError={true} placeholder={'Interests'}/>
+              <SubmitField value='Submit'/>
+            </Segment>
+          </AutoForm>
+          <Card.Group style={{ paddingTop: '10px' }}>
+            {this.props.book.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
+          </Card.Group>
+        </Container>
     );
   }
 }
