@@ -21,7 +21,7 @@ class ListTextbooks extends React.Component {
                 <Header as="h2" inverted textAlign="center">Search Results</Header>
                 <Card.Group centered>
                     {this.props.book.map((book, index) => <TextbookEntryPublic
-                        TextbookEntryPublic={TextbookEntryPublic} key={ index } book={ book }
+                        Book={Book} key={ index } book={ book }
                     />)}
                 </Card.Group>
             </Container>
