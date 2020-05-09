@@ -86,7 +86,7 @@ class Search extends React.Component {
                 <Header as ="h2" textAlign="center">Search for textbooks based on author, ISBN, or title.</Header>
                 <AutoForm schema={formSchema} onSubmit={data => this.submit(data)} >
                     <Segment>
-                     
+
                         <SubmitField value='Submit'/>
                     </Segment>
                 </AutoForm>
