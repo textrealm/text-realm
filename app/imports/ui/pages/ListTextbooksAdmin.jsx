@@ -20,7 +20,7 @@ class ListTextbooksAdmin extends React.Component {
         <Container>
           <Header as="h2" textAlign="center" >All Textbooks</Header>
           <Card.Group>
-            {this.props.book.map((book, index) => <TextbookEntryAdmin key={ index }
+            {this.props.book.map((book, index) => <TextbookEntryAdmin Book={Book} key={ index }
                                                                  book={ book }
             />)}
           </Card.Group>
