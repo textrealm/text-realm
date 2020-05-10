@@ -69,7 +69,7 @@ class Signup extends React.Component {
                   icon="user"
                   iconPosition="left"
                   name="email"
-                  placeholder="E-mail address"
+                  placeholder="E-mail Address"
                 />
                 <TextField
                   label="School ID"

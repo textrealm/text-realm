@@ -1,6 +1,5 @@
 import React from 'react';
-import { Loader, Segment, Container, Header, Card, Checkbox, Form } from 'semantic-ui-react';
-import { AutoForm, SubmitField } from 'uniforms-semantic';
+import { Loader, Segment, Container, Header, Card } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -56,20 +55,26 @@ import SearchComp from '../components/SearchComp';
 // };
 //
 
-const makeSchema = () => new SimpleSchema({
-    title: { type: String, label: "Book Title", optional: true },
-    author: { type: String, label: "Author of the Book", optional: true },
-    ISBN: { type: Number, label: "ISBN", optional: true },
-});
+// const makeSchema = () => new SimpleSchema({
+//     title: { type: String, label: "Book Title", optional: true },
+//     author: { type: String, label: "Author of the Book", optional: true },
+//     ISBN: { type: Number, label: "ISBN", optional: true },
+// });
 
 /** Renders the Profile Collection as a set of Cards. */
 class Search extends React.Component {
+    getBooks;
+    chosen;
     constructor(props) {
         super(props);
-        this.state = { getBooks: [], chosen: 'title', search: false };
+        this.getBooks = {};
     }
-    handleChange = (e, { value }) => this.setState({ chosen: value });
 
+    bookSearch = (search) => {
+        this.search = search;
+        let lowerSearch = this.search.toLowerCase();
+        this.getBooks = _.filter(this.props.books, function(object){ return object["title"].toLowerCase() === lowerSearch; });
+    };
     /** On successful submit, search for data. */
 
     /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -79,19 +84,15 @@ class Search extends React.Component {
 
     /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
     renderPage() {
-        const formSchema = makeSchema();
         return (
             <Container>
                 <Header as="h1" textAlign="center">Search For Books</Header>
                 <Header as ="h2" textAlign="center">Search for textbooks based on author, ISBN, or title.</Header>
-                <AutoForm schema={formSchema} onSubmit={data => this.submit(data)} >
                     <Segment>
-
-                        <SubmitField value='Submit'/>
+                        <SearchComp send={this.bookSearch.bind(this)}/>
                     </Segment>
-                </AutoForm>
                 <Card.Group style={{ paddingTop: '10px' }}>
-                    {this.props.book.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
+                    {this.props.books.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
                 </Card.Group>
             </Container>
         );
@@ -109,7 +110,7 @@ export default withTracker(() => {
     // Get access to Stuff documents.
     const subscription = Meteor.subscribe('Book');
     return {
-        books: Book.find().fetch(),
+        books: Book.find({}).fetch(),
         ready: subscription.ready(),
     };
 })(Search);
