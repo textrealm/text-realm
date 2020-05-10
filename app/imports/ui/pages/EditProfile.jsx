@@ -37,7 +37,7 @@ class EditProfile extends React.Component {
     return (
         <Grid container inverted centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Edit Profile</Header>
+            <Header as="h2" inverted textAlign="center">Edit Profile</Header>
             <AutoForm schema={ formSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='name'/>

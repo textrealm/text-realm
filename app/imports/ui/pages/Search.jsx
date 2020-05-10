@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader, Segment, Container, Header, Card } from 'semantic-ui-react';
+import { Loader, Segment, Container, Header, Card, Grid } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -7,59 +7,6 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { Book } from '../../api/book/Book';
 import TextbookEntryPublic from '../components/TextbookEntryPublic';
 import SearchComp from '../components/SearchComp';
-
-
-// /** Renders the Page for editing a single document. */
-// class Search extends React.Component {
-// /** Create a schema to specify the structure of the data to appear in the form. */
-// const makeSchema = (allInterests) => new SimpleSchema({
-//   interests: { type: Array, label: 'Interests', optional: true },
-//   'interests.$': { type: String, allowedValues: allInterests },
-// });
-//
-// function getBookData(book) {
-//   const data = Book.findOne({ book });
-//   const title = _.pluck(ProfilesInterests.find({ profile: email }).fetch(), 'title');
-//   const ISBN = _.pluck(ProfilesProjects.find({ profile: email }).fetch(), 'ISBN');
-//   const author = _.pluck(ProfilesProjects.find({ profile: email }).fetch(), 'author');
-//   return _.extend({ }, data, { title, ISBN, author });
-// }
-//
-// /** Component for layout out a Profile Card. */
-// const MakeCard = (props) => (
-//     <Card>
-//       <Card.Content>
-//         <Image floated='right' size='mini' src={props.profile.picture} />
-//         <Card.Header>{props.profile.firstName} {props.profile.lastName}</Card.Header>
-//         <Card.Meta>
-//           <span className='date'>{props.profile.title}</span>
-//         </Card.Meta>
-//         <Card.Description>
-//           {props.profile.bio}
-//         </Card.Description>
-//       </Card.Content>
-//       <Card.Content extra>
-//         {_.map(props.profile.interests,
-//             (interest, index) => <Label key={index} size='tiny' color='teal'>{interest}</Label>)}
-//       </Card.Content>
-//       <Card.Content extra>
-//         <Header as='h5'>Projects</Header>
-//         {_.map(props.profile.projects, (project, index) => <Image key={index} size='mini' src={project}/>)}
-//       </Card.Content>
-//     </Card>
-// );
-//
-// /** Properties */
-// MakeCard.propTypes = {
-//   profile: PropTypes.object.isRequired,
-// };
-//
-
-// const makeSchema = () => new SimpleSchema({
-//     title: { type: String, label: "Book Title", optional: true },
-//     author: { type: String, label: "Author of the Book", optional: true },
-//     ISBN: { type: Number, label: "ISBN", optional: true },
-// });
 
 /** Renders the Profile Collection as a set of Cards. */
 class Search extends React.Component {
@@ -94,9 +41,9 @@ class Search extends React.Component {
             <Container>
                 <Header as="h1" inverted textAlign="center">Search For Books</Header>
                 <Header as ="h2" inverted textAlign="center">Search for textbooks based on author, ISBN, or title.</Header>
-                    <Segment>
-                        <SearchComp send={this.bookSearch.bind(this)}/>
-                    </Segment>
+                    <Grid container centered style={{ margin: '50px' }}>
+                         <SearchComp send={this.bookSearch.bind(this)}/>
+                    </Grid>
 
                 { this.state.chosen === 'title' ? (
                     <Card.Group> {this.props.books.map((book, index) => <TextbookEntryPublic key={index}
@@ -121,7 +68,7 @@ export default withTracker(() => {
     // Get access to Stuff documents.
     const subscription = Meteor.subscribe('Book');
     return {
-        books: Book.find().fetch(),
+        books: Book.find({}).fetch(),
         ready: subscription.ready(),
     };
 })(Search);
