@@ -1,68 +1,67 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Container, Loader, Card, Image, Label, Header, Segment } from 'semantic-ui-react';
+import { Container, Loader, Card, Header, Segment } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
-import { AutoForm, TextField, NumField, SubmitField, ErrorsField } from 'uniforms-semantic';
+import { AutoForm, TextField, NumField, SubmitField } from 'uniforms-semantic';
 import { Book } from '../../api/book/Book';
-import TextbookEntryPublic from "../components/TextbookEntryPublic";
+import TextbookEntryPublic from '../components/TextbookEntryPublic';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
-const makeSchema = (allInterests) => new SimpleSchema({
-  interests: { type: Array, label: 'Interests', optional: true },
-  'interests.$': { type: String, allowedValues: allInterests },
+const searchSchema = new SimpleSchema({
+  title: { type: String, optional: true },
+  ISBN: { type: Number, optional: true },
+  author: { type: String, optional: true },
 });
 
 function getBookData(book) {
   const data = Book.findOne({ book });
-  const title = _.pluck(ProfilesInterests.find({ profile: email }).fetch(), 'title');
-  const ISBN = _.pluck(ProfilesProjects.find({ profile: email }).fetch(), 'ISBN');
-  const author = _.pluck(ProfilesProjects.find({ profile: email }).fetch(), 'author');
-  return _.extend({ }, data, { title, ISBN, author });
+  const title = _.pluck(Book.find({ title: book.title }).fetch(), 'title');
+  const ISBN = _.pluck(Book.find({ ISBN: book.ISBN }).fetch(), 'ISBN');
+  const author = _.pluck(Book.find({ author: book.author }).fetch(), 'author');
+  return _.extend({}, data, { title, ISBN, author });
 }
 
-/** Component for layout out a Profile Card. */
-const MakeCard = (props) => (
-    <Card>
-      <Card.Content>
-        <Image floated='right' size='mini' src={props.profile.picture} />
-        <Card.Header>{props.profile.firstName} {props.profile.lastName}</Card.Header>
-        <Card.Meta>
-          <span className='date'>{props.profile.title}</span>
-        </Card.Meta>
-        <Card.Description>
-          {props.profile.bio}
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        {_.map(props.profile.interests,
-            (interest, index) => <Label key={index} size='tiny' color='teal'>{interest}</Label>)}
-      </Card.Content>
-      <Card.Content extra>
-        <Header as='h5'>Projects</Header>
-        {_.map(props.profile.projects, (project, index) => <Image key={index} size='mini' src={project}/>)}
-      </Card.Content>
-    </Card>
-);
-
-/** Properties */
-MakeCard.propTypes = {
-  profile: PropTypes.object.isRequired,
-};
-
+function filter(data, field, values) {
+  _.filter(data, function (item) {
+    return _.contains(values, item[field]);
+  })
+}
 
 /** Renders the Profile Collection as a set of Cards. */
-class Filter extends React.Component {
-
+class Search extends React.Component {
+  results;
+  title;
+  ISBN;
+  author;
   constructor(props) {
     super(props);
-    this.state = { interests: [] };
+    this.state = { title: 'All Titles', ISBN: 'All ISBN', author: 'All Authors' };
+    this.results = {};
+    this.title = 'All Titles';
+    this.ISBN = 'All ISBN';
+    this.author = 'All Authors';
   }
 
   submit(data) {
-    this.setState({ interests: data.interests || [] });
+    this.setState({ title: data.title, ISBN: data.ISBN, author: data.author });
+    if (this.state.title != '') {
+      this.results = _.filter(this.props.books, function (object) {
+        return object["title"].toLowerCase() === data.title;
+      });
+    }
+    if (this.state.ISBN != '') {
+      this.results = _.filter(this.props.books, function (object) {
+        return object["ISBN"].toLowerCase() === data.ISBN;
+      });
+    }
+    if (this.state.author != '') {
+      this.results = _.filter(this.props.books, function (object) {
+        return object["author"].toLowerCase() === data.author;
+      });
+    }
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -72,36 +71,43 @@ class Filter extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
-    const allInterests = _.pluck(Interests.find().fetch(), 'name');
-    const formSchema = makeSchema(allInterests);
-    const emails = _.pluck(ProfilesInterests.find({ interest: { $in: this.state.interests } }).fetch(), 'profile');
-    const profileData = _.uniq(emails).map(email => getProfileData(email));
     return (
-        <Container>
-          <AutoForm schema={formSchema} onSubmit={data => this.submit(data)} >
+        <Container centered="true">
+          <AutoForm schema={searchSchema} onSubmit={data => this.submit(data)}>
             <Segment>
-              <MultiSelectField name='interests' showInlineError={true} placeholder={'Interests'}/>
+              <TextField name='title'/>
+              <NumField name='ISBN' decimal={false}/>
+              <TextField name='author'/>
               <SubmitField value='Submit'/>
             </Segment>
           </AutoForm>
-          <Card.Group style={{ paddingTop: '10px' }}>
-            {_.map(profileData, (profile, index) => <MakeCard key={index} profile={profile}/>)}
-          </Card.Group>
+          <Header as="h2" inverted textAlign="center">Search Results</Header>
+          {this.state.title === 'title' ? (
+              <Card.Group centered>
+                {this.props.book.map((book, index) => <TextbookEntryPublic key={index}
+                                                                           book={book}
+                />)}
+              </Card.Group>) : (this.results.length === 0 ? (<Header as="h2" textAlign="center">No results.</Header>) :
+              <Card.Group>
+                {this.results.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)} </Card.Group>)}
         </Container>
     );
   }
-}}
+}
 
 /** Require an array of Stuff documents in the props. */
 Search.propTypes = {
+  book: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
-/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+/** withTracker connects Meteor data to React components.
+ https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Ensure that minimongo is populated with all collections prior to running render().
-  const sub1 = Meteor.subscribe('Book');
+  const subscription = Meteor.subscribe('Book');
   return {
-    ready: sub1.ready()
+    book: Book.find({}).fetch(),
+    ready: subscription.ready(),
   };
 })(Search);

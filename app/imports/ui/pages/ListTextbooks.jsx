@@ -4,7 +4,7 @@ import { Container, Header, Loader, Card } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Book } from '../../api/book/Book';
-import TextbookEntryPublic from "../components/TextbookEntryPublic";
+import TextbookEntryPublic from '../components/TextbookEntryPublic';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListTextbooks extends React.Component {
