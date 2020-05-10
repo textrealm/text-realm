@@ -20,7 +20,7 @@ class AboutFAQ extends React.Component {
                 <h2>Q: How do I sell my textbooks?</h2>
 
 <p>A: Click on the ‘Sell A Textbook!’ option in the menu bar, which will direct you to a page where you must fill in the
-required information about the textbook that you plan to sell. You must be logged in to be able to sell a textbook.</p>
+required information about the textbook that you plan to sell. From there, you can find the seller's email to contact them. You must be logged in to be able to sell a textbook.</p>
 
           </Grid.Column>
         </Grid>

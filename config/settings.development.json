@@ -10,7 +10,7 @@
       "ISBN":  "99988827",
       "image":  "https://images-na.ssl-images-amazon.com/images/I/513P8XoCAEL._AC_UL600_SR453,600_.jpg",
       "author":  "Thomas Cormen",
-      "owner":  "john@foo.com",
+      "owner":  "mary@foo.com",
       "cost":  "100",
       "yearPublished": "1989",
       "description": "A very useful book for all computer scientists.",

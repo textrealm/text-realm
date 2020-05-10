@@ -48,7 +48,7 @@ class Search extends React.Component {
                 { this.state.chosen === 'title' ? (
                     <Card.Group> {this.props.books.map((book, index) => <TextbookEntryPublic key={index}
                                                                                   book={book}/>)}</Card.Group>
-                ) : ( this.getBooks.length === 0 ? (<Header as="h2" textAlign="center">No results.</Header>) :
+                ) : ( this.getBooks.length === 0 ? (<Header inverted as="h2" textAlign="center">No results.</Header>) :
                     <Card.Group> { this.getBooks.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
                     </Card.Group> )
                 }

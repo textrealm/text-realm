@@ -13,8 +13,16 @@ Meteor.publish('UserInfo', function publish() {
 
 Meteor.publish('Book', function publish() {
   if (this.userId) {
+    // const username = Meteor.users.findOne(this.userId).username;
+    return Book.find({});
+  }
+  return this.ready();
+});
+
+Meteor.publish('UserBook', function publish() {
+  if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return Book.find({owner: username});
+    return Book.find({ owner: username });
   }
   return this.ready();
 });

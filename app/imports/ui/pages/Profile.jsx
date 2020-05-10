@@ -61,7 +61,7 @@ export default withTracker(({ match }) => {
     const userId = match.params._id;
     const getUser = Meteor.users.findOne(userId);
     const subscription = Meteor.subscribe('UserInfo');
-    const bookSub = Meteor.subscribe('Book');
+    const bookSub = Meteor.subscribe('UserBook');
     return {
         userInfo: UserInfo.findOne({ username: getUser }),
         books: Book.find({ username: getUser }).fetch(),
