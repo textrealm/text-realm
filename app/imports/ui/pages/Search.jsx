@@ -64,16 +64,22 @@ import SearchComp from '../components/SearchComp';
 /** Renders the Profile Collection as a set of Cards. */
 class Search extends React.Component {
     getBooks;
-    chosen;
     constructor(props) {
         super(props);
+        this.state = { chosen: 'title' };
         this.getBooks = {};
     }
 
     bookSearch = (search) => {
+        let newState;
+        newState = {
+            chosen: 'search'
+        };
+        this.setState(newState);
         this.search = search;
         let lowerSearch = this.search.toLowerCase();
-        this.getBooks = _.filter(this.props.books, function(object){ return object["title"].toLowerCase() === lowerSearch; });
+        this.getBooks = _.filter(this.props.books, function(object) {
+            return object["title"].toLowerCase().includes(lowerSearch);});
     };
     /** On successful submit, search for data. */
 
@@ -86,14 +92,19 @@ class Search extends React.Component {
     renderPage() {
         return (
             <Container>
-                <Header as="h1" textAlign="center">Search For Books</Header>
-                <Header as ="h2" textAlign="center">Search for textbooks based on author, ISBN, or title.</Header>
+                <Header as="h1" inverted textAlign="center">Search For Books</Header>
+                <Header as ="h2" inverted textAlign="center">Search for textbooks based on author, ISBN, or title.</Header>
                     <Segment>
                         <SearchComp send={this.bookSearch.bind(this)}/>
                     </Segment>
-                <Card.Group style={{ paddingTop: '10px' }}>
-                    {this.props.books.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
-                </Card.Group>
+
+                { this.state.chosen === 'title' ? (
+                    <Card.Group> { this.props.books.map((book, index) => <TextbookEntryPublic key={index}
+                                                                                  book={book}/>)}</Card.Group>
+                ) : ( this.getBooks.length === 0 ? (<Header as = "h2" textAlign="center" >No results.</Header>) :
+                    <Card.Group> { this.getBooks.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
+                    </Card.Group> )
+                }
             </Container>
         );
     }
@@ -110,7 +121,7 @@ export default withTracker(() => {
     // Get access to Stuff documents.
     const subscription = Meteor.subscribe('Book');
     return {
-        books: Book.find({}).fetch(),
+        books: Book.find().fetch(),
         ready: subscription.ready(),
     };
 })(Search);
