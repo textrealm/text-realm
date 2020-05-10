@@ -23,7 +23,7 @@ hasValue() {
 render() {
     return (
         <div>
-            <Input fluid type="search" placeholder="Search by Title, ISBN, or Author"
+            <input type="search" placeholder="Search by Title, ISBN, or Author"
                    ref={userIn => this.result = userIn}/>
             <Button type='submit' onClick={() => this.hasValue()}>Let's Go!</Button>
         </div>

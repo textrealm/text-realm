@@ -77,9 +77,9 @@ class Search extends React.Component {
         };
         this.setState(newState);
         this.search = search;
-        let lowerSearch = this.search.toLowerCase();
+        let lowerSearch = search.toLowerCase();
         this.getBooks = _.filter(this.props.books, function(object) {
-            return object["title"].toLowerCase().includes(lowerSearch);});
+            return object["title"].toLowerCase().includes(lowerSearch) });
     };
     /** On successful submit, search for data. */
 
@@ -99,9 +99,9 @@ class Search extends React.Component {
                     </Segment>
 
                 { this.state.chosen === 'title' ? (
-                    <Card.Group> { this.props.books.map((book, index) => <TextbookEntryPublic key={index}
+                    <Card.Group> {this.props.books.map((book, index) => <TextbookEntryPublic key={index}
                                                                                   book={book}/>)}</Card.Group>
-                ) : ( this.getBooks.length === 0 ? (<Header as = "h2" textAlign="center" >No results.</Header>) :
+                ) : ( this.getBooks.length === 0 ? (<Header as="h2" textAlign="center">No results.</Header>) :
                     <Card.Group> { this.getBooks.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
                     </Card.Group> )
                 }
