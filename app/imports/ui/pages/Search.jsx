@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader, Segment, Container, Header, Card, Grid } from 'semantic-ui-react';
+import { Loader, Container, Header, Card, Grid } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
