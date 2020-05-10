@@ -52,7 +52,7 @@ class BookProfile extends React.Component {
                             </Card.Content>
                             <Card.Content extra>
                               Contact/View More From The Seller At: <NavLink
-                                exact to={`/profile/${this.props.book.sellUser}`}><b>{this.props.book.owner}</b></NavLink>
+                                exact to={`/profile/${this.props.sellUser}`}><b>{this.props.book.owner}</b></NavLink>
                             </Card.Content>
                         </Card>
                     </Grid.Column>
@@ -74,9 +74,11 @@ export default withTracker(( { match }) => {
     const documentId = match.params._id;
     const subscription = Meteor.subscribe('Book');
     const useSub = Meteor.subscribe('UserInfo');
+    const getOwn = Meteor.user() ? Meteor.userId() : '';
+    const getUser = getOwn ? getOwn.username : '';
     return {
         book: Book.findOne(documentId),
         ready: subscription.ready() && useSub.ready(),
-        sellUser: Meteor.user() ? Meteor.userId() : '',
+        sellUser: Book.find({ owner: getUser }).fetch(),
     };
 })(BookProfile);
