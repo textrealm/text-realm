@@ -1,7 +1,8 @@
 {
   "defaultAccounts": [
     { "email": "john@foo.com", "password": "changeme" },
-    { "email": "mary@foo.com", "password": "changeme" }
+    { "email": "mary@foo.com", "password": "changeme" },
+    { "email": "admin@foo.com", "password": "changeme", "role": "admin" }
   ],
 
   "defaultBooks": [

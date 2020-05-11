@@ -7,7 +7,7 @@ import { Book } from '../../api/book/Book';
 import TextbookEntry from '../components/TextbookEntry';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class ListTextbooks extends React.Component {
+class ListTextbooksAdmin extends React.Component {
 
     /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
     render() {
@@ -29,7 +29,7 @@ class ListTextbooks extends React.Component {
     }
 }
 /** Require an array of Stuff documents in the props. */
-ListTextbooks.propTypes = {
+ListTextbooksAdmin.propTypes = {
     book: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
@@ -42,4 +42,4 @@ export default withTracker(() => {
         book: Book.find({}).fetch(),
         ready: subscription.ready(),
     };
-})(ListTextbooks);
+})(ListTextbooksAdmin);
