@@ -16,52 +16,43 @@ const searchSchema = new SimpleSchema({
   author: { type: String, optional: true },
 });
 
-function getBookData(book) {
-  const data = Book.findOne({ book });
-  const title = _.pluck(Book.find({ title: book.title }).fetch(), 'title');
-  const ISBN = _.pluck(Book.find({ ISBN: book.ISBN }).fetch(), 'ISBN');
-  const author = _.pluck(Book.find({ author: book.author }).fetch(), 'author');
-  return _.extend({}, data, { title, ISBN, author });
-}
-
-function filter(data, field, values) {
-  _.filter(data, function (item) {
-    return _.contains(values, item[field]);
-  })
-}
-
 /** Renders the Profile Collection as a set of Cards. */
 class Search extends React.Component {
   results;
-  title;
-  ISBN;
-  author;
+
+  filtered;
+
+  test;
+
   constructor(props) {
     super(props);
-    this.state = { title: 'All Titles', ISBN: 'All ISBN', author: 'All Authors' };
-    this.results = {};
-    this.title = 'All Titles';
-    this.ISBN = 'All ISBN';
-    this.author = 'All Authors';
+    this.state = { filtered: 'All Books' };
+    this.results = []; // Need to fix why {} doesn't create an array
+    this.test = {};
+    this.filtered = 'All Books';
   }
 
   submit(data) {
-    this.setState({ title: data.title, ISBN: data.ISBN, author: data.author });
-    if (this.state.title != '') {
-      this.results = _.filter(this.props.books, function (object) {
-        return object["title"].toLowerCase() === data.title;
+    this.setState({ filtered: data.title });
+    if (this.filtered !== '') {
+      this.results = _.filter(this.props.book, function (object) {
+        return object.title.toLowerCase().includes(this.filtered.toLowerCase());
       });
     }
-    if (this.state.ISBN != '') {
-      this.results = _.filter(this.props.books, function (object) {
-        return object["ISBN"].toLowerCase() === data.ISBN;
+    this.setState({ filtered: data.ISBN });
+    if (this.filtered !== '') {
+      this.results = _.filter(this.props.book, function (object) {
+        return object.ISBN.toLowerCase().includes(this.filtered.toLowerCase());
       });
     }
-    if (this.state.author != '') {
-      this.results = _.filter(this.props.books, function (object) {
-        return object["author"].toLowerCase() === data.author;
+    this.setState({ filtered: data.author });
+    if (this.filtered !== '') {
+      this.results = _.filter(this.props.book, function (object) {
+        return object.author.toLowerCase().includes(this.filtered.toLowerCase());
       });
     }
+    this.setState({ filtered: data.title });
+    this.test.map([1, 2], _.last);
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -82,7 +73,7 @@ class Search extends React.Component {
             </Segment>
           </AutoForm>
           <Header as="h2" inverted textAlign="center">Search Results</Header>
-          {this.state.title === 'title' ? (
+          {this.state.filtered === 'title' ? (
               <Card.Group centered>
                 {this.props.book.map((book, index) => <TextbookEntryPublic key={index}
                                                                            book={book}
