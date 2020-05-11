@@ -28,6 +28,14 @@
 
   "defaultProfile": [
     {
+      "name": "Admin",
+      "email":  "admin@foo.com",
+      "id": "11111111",
+      "image": "https://react.semantic-ui.com/images/wireframe/image.png",
+      "description": "Welcome to the TextRealm community!",
+      "owner": "admin@foo.com"
+    },
+    {
       "name": "John",
       "email": "john@foo.com",
       "id": "9682228",
