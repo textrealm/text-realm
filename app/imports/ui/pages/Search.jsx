@@ -26,27 +26,27 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { filtered: 'All Books' };
-    this.results = []; // Need to fix why {} doesn't create an array
+    this.state = { filtered: 'book' };
+    this.results = {}; // Need to fix why {} doesn't create an array
     this.test = {};
-    this.filtered = 'All Books';
+    this.filtered = 'book';
   }
 
   submit(data) {
-    this.setState({ filtered: data.title });
-    if (this.filtered !== '') {
+    if (data.title !== '') {
+      this.setState({ filtered: data.title });
       this.results = _.filter(this.props.book, function (object) {
         return object.title.toLowerCase().includes(this.filtered.toLowerCase());
       });
     }
-    this.setState({ filtered: data.ISBN });
-    if (this.filtered !== '') {
+    if (data.ISBN !== '') {
+      this.setState({ filtered: data.ISBN });
       this.results = _.filter(this.props.book, function (object) {
         return object.ISBN.toLowerCase().includes(this.filtered.toLowerCase());
       });
     }
-    this.setState({ filtered: data.author });
-    if (this.filtered !== '') {
+    if (data.author !== '') {
+      this.setState({ filtered: data.author });
       this.results = _.filter(this.props.book, function (object) {
         return object.author.toLowerCase().includes(this.filtered.toLowerCase());
       });
