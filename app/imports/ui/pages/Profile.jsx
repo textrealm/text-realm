@@ -75,7 +75,7 @@ export default withTracker(({ match }) => {
     const bookSub = Meteor.subscribe('UserBook');
     const getRate = Meteor.subscribe('Ratings');
     return {
-        userInfo: UserInfo.findOne(),
+        userInfo: UserInfo.findOne({ username: getUser }),
         books: Book.find({ username: getUser }).fetch(),
         rating: Ratings.find( {}, { sort: { postedAt: -1} } ).fetch(),
         ready: subscription.ready() && bookSub.ready() && getRate.ready(),
