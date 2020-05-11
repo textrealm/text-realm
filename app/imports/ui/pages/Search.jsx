@@ -71,7 +71,7 @@ Search.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-    // Get access to Stuff documents.
+    // Get access to Book documents.
     const subscription = Meteor.subscribe('Book');
     return {
         books: Book.find({}).fetch(),
