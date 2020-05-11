@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Ratings } from '../../api/rating/Rating';
 import Reviews from '../components/Reviews';
 
+
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class RecentComments extends React.Component {
 
@@ -36,7 +37,7 @@ RecentComments.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-    // Get access to Book documents.
+    // Get access to user comments' documents.
     const subscription = Meteor.subscribe('Ratings');
     return {
         comments: Ratings.find({}).fetch(),

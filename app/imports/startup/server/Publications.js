@@ -31,4 +31,5 @@ Meteor.publish('Ratings', function publish() {
   if (this.userId) {
     return Ratings.find({});
   }
+  return this.ready();
 });

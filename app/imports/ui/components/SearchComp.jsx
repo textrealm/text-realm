@@ -12,10 +12,6 @@ export class SearchComp extends React.Component {
         this.result = '';
     }
 
-// handleChange(event)
-// {
-//     this.setState({value: event.target.value});
-// }
     hasValue() {
         if (this.result.value !== '') {
             this.props.send(this.result.value);

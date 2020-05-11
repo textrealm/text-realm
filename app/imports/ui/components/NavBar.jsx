@@ -22,7 +22,7 @@ class NavBar extends React.Component {
               [
                   <Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Sell A Textbook</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>Search For Books</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/recentComments" key='recentComments'>Recent User Comments</Menu.Item>,
+                <Menu.Item as={NavLink} activeClassName="active" exact to="/recentComments" key='recentComments'>User Reviews</Menu.Item>,
                   <Menu.Item as={NavLink} activeClassName="active" exact to="/addComment" key='addComment'>Add A User Review</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact to={`/profile/${this.props.currentId}`} key='profile'> My
                   Profile </Menu.Item>,

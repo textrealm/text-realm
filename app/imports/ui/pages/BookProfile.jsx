@@ -64,7 +64,6 @@ class BookProfile extends React.Component {
 BookProfile.propTypes = {
     book: PropTypes.object.isRequired,
     ready: PropTypes.bool.isRequired,
-    sellUser: PropTypes.string,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
@@ -75,6 +74,5 @@ export default withTracker(( { match }) => {
     return {
         book: Book.findOne(documentId),
         ready: subscription.ready() && useSub.ready(),
-        sellUser: Meteor.user() ? Meteor.userId() : '',
     };
 })(BookProfile);

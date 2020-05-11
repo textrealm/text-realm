@@ -59,7 +59,8 @@
       "toUser" : "mary@foo.com",
       "comment": "Bought from them before. They are really nice!",
       "rating": 4,
-      "postedAt": "Sun May 10 2020 20:00:32 GMT-1000 (Hawaii-Aleutian Standard Time)"
+      "postedAt": "Sun May 10 2020 20:00:32 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "owner": "john@foo.com"
     }
   ]
 }

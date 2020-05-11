@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment, Icon } from 'semantic-ui-react';
+import { Icon, Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
@@ -8,27 +8,30 @@ import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 class Reviews extends React.Component {
     render() {
         return (
-            <Comment>
-                <Comment.Avatar as='a' src={this.props.review.userImage} />
-                <Comment.Author>
-                    {this.props.review.userEmail}
-                </Comment.Author>
-                <Comment.Metadata>
-                <div>this.props.review.postedAt.toLocaleDateString('en-US')}</div>
-                <div>
-                    {this.props.review.rating} <Icon name='star' />
-                </div>
-            </Comment.Metadata>
-                <Comment.Text>
-                    {this.props.review.comment}
-                </Comment.Text>
-            </Comment>
+           <Card>
+               <Card.Content>
+                   <Image src={this.props.reviews.userImage} floated='right' size='mini' />
+                   <Card.Header>{this.props.reviews.userEmail}</Card.Header>
+                   <Card.Meta>
+                       <div>{this.props.reviews.postedAt.toLocaleDateString('en-US')}</div>
+                       <div>
+                           Rating: {this.props.reviews.rating} <Icon name='star'/>
+                       </div>
+                   </Card.Meta>
+                   <Card.Content>
+                       Bought From: {this.props.reviews.toUser}
+                   </Card.Content>
+                   <Card.Description>
+                       {this.props.reviews.comment}
+                   </Card.Description>
+               </Card.Content>
+           </Card>
         );
     }
 }
 
 Reviews.propTypes = {
-    review: PropTypes.object.isRequired,
+    reviews: PropTypes.object,
 };
 
 export default withRouter(Reviews);
