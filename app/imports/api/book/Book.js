@@ -8,11 +8,11 @@ const Book = new Mongo.Collection('Book');
 /** Define a schema to specify the structure of each document in the collection. */
 const BookSchema = new SimpleSchema({
   title: String,
-  ISBN: Number,
+  ISBN: { type: Number, min: 0 },
   image: String,
   author: String,
   owner: String,
-  cost: Number,
+  cost: { type: Number, min: 0 },
   description: String,
   yearPublished: String,
   condition: {
