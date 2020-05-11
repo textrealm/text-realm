@@ -13,6 +13,7 @@ const RatingSchema = new SimpleSchema({
     comment: String,
     rating: Number,
     postedAt: Date,
+    owner: String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
