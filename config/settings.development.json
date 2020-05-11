@@ -51,5 +51,15 @@
       "description": "I am a student",
       "owner": "mary@foo.com"
     }
+  ],
+  "defaultRatings": [
+    {
+      "userEmail": "john@foo.com",
+      "userImage": "https://react.semantic-ui.com/images/wireframe/image.png",
+      "toUser" : "mary@foo.com",
+      "comment": "Bought from them before. They are really nice!",
+      "rating": 4,
+      "postedAt": "Sun May 10 2020 20:00:32 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    }
   ]
 }

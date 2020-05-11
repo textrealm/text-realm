@@ -24,12 +24,12 @@ class Search extends React.Component {
         };
         this.setState(newState);
         this.search = search;
-        let lowerSearch = search.toLowerCase();
+        let check = search.toLowerCase();
         this.getBooks = _.filter(this.props.books, function(object) {
-            if (object["title"].toLowerCase().includes(lowerSearch)) {
-                return object["title"].toLowerCase().includes(lowerSearch);
-            } else if (object["author"].toLowerCase().includes(lowerSearch)) {
-                return object["author"].toLowerCase().includes(lowerSearch);
+            if (object["title"].toLowerCase().includes(check)) {
+                return object["title"].toLowerCase().includes(check);
+            } else if (object["author"].toLowerCase().includes(check)) {
+                return object["author"].toLowerCase().includes(check);
             }  else if (object["ISBN"] === parseInt(search)) {
                 return object["ISBN"];
             }});

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Book } from '../../api/book/Book.js';
+import { Ratings } from '../../api/rating/Rating';
 
 /* eslint-disable no-console */
 
@@ -16,3 +17,16 @@ if (Book.find().count() === 0) {
     Meteor.settings.defaultBooks.map(data => addBook(data));
   }
 }
+
+function addRating(rating) {
+  console.log(`  Adding: ${rating.toUser}`);
+  Ratings.insert(rating);
+}
+
+if (Ratings.find().count() === 0) {
+  if (Meteor.settings.defaultRatings) {
+    console.log('Creating default ratings.');
+    Meteor.settings.defaultRatings.map(data => addRating(data));
+  }
+}
+
