@@ -1,14 +1,15 @@
 import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
+import {AutoForm, ErrorsField, SubmitField, TextField, NumField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { Ratings } from '../../api/rating/Rating';
-import SimpleSchema from "simpl-schema";
+import SimpleSchema from 'simpl-schema';
 
 const formSchema = new SimpleSchema({
-  userEmail: { type: String, label: 'User Email:'},
+  userEmail: { type: String, label: 'Name:' },
+  userImage: { type: String, label: 'User Image:' },
   toUser: { type: String, label: 'Review For:'},
   comment: String,
   rating: { type: Number, label: 'Rating:', min: 0, max: 5},
@@ -18,9 +19,10 @@ class AddComment extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { userEmail, toUser, comment, rating } = data;
+    const { userEmail, userImage, toUser, comment, rating } = data;
     const owner = Meteor.user().username;
-    Ratings.insert({ userEmail, toUser, comment, rating, owner },
+    const postedAt = new Date();
+    Ratings.insert({ userEmail, userImage, toUser, comment, rating, postedAt, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -42,7 +44,9 @@ class AddComment extends React.Component {
             <AutoForm ref={ref => { fRef = ref; }} schema={ formSchema } onSubmit={data => this.submit(data, fRef)} >
               <Segment>
                 <TextField name='userEmail'/>
+                <TextField name='userImage'/>
                 <TextField name='toUser'/>
+                <NumField name='rating' decimal={true}/>
                 <TextField name='comment'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>

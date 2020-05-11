@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Image, Input } from 'semantic-ui-react';
+import { Menu, Dropdown, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
@@ -20,11 +20,10 @@ class NavBar extends React.Component {
           ) : ''}
           {this.props.currentUser ? (
               [
-                  <Menu.Item as={NavLink} activeClassName="active" exact to="/about"> About/FAQ </Menu.Item>,
                   <Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Sell A Textbook</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Results</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/recentComments" key='comment'>Recent User Comments</Menu.Item>,
-                  <Menu.Item as={NavLink} activeClassName="active" exact to="/addComment" key='addCom'>Add A User Review</Menu.Item>,
+                <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>Search For Books</Menu.Item>,
+                <Menu.Item as={NavLink} activeClassName="active" exact to="/recentComments" key='recentComments'>Recent User Comments</Menu.Item>,
+                  <Menu.Item as={NavLink} activeClassName="active" exact to="/addComment" key='addComment'>Add A User Review</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact to={`/profile/${this.props.currentId}`} key='profile'> My
                   Profile </Menu.Item>,
               ]

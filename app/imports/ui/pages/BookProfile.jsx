@@ -3,7 +3,6 @@ import { Image, Card, Grid, Header, Container, Loader } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { NavLink } from 'react-router-dom';
 import { Book } from '../../api/book/Book';
 import { UserInfo } from '../../api/userinfo/Userinfo';
 
@@ -51,8 +50,7 @@ class BookProfile extends React.Component {
                                 <br/>
                             </Card.Content>
                             <Card.Content extra>
-                              Contact/View More From The Seller At: <NavLink sellerId={this.props.sellUser}
-                                to={`/profile/${this.props.book.sellerId}`}><b>{this.props.book.owner}</b></NavLink>
+                              Contact The Seller At:<b>{this.props.book.owner}</b>
                             </Card.Content>
                         </Card>
                     </Grid.Column>
