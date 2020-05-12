@@ -50,7 +50,7 @@ class BookProfile extends React.Component {
                                 <br/>
                             </Card.Content>
                             <Card.Content extra>
-                              Contact The Seller At:<b>{this.props.book.owner}</b>
+                              Interested? Contact the seller at: <b>{this.props.book.owner}</b>
                             </Card.Content>
                         </Card>
                     </Grid.Column>

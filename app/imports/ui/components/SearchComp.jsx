@@ -21,12 +21,12 @@ export class SearchComp extends React.Component {
     render() {
         return (
             <Container className='search-bar'>
-                <input style={{ height: '35px', width: '900px', borderless: 'true' }} type="search" placeholder="Search by Title, ISBN, or Author"
+                <input style={{ height: '35px', width: '900px', borderless: 'true' }} type="search"
+                       placeholder="Search by Title, ISBN, or Author"
                        ref={userIn => this.result = userIn}/>
-                <Button type='submit' onClick={() => this.hasValue()}>Let's Go!</Button>
+                <Button type='submit' onClick={() => this.hasValue()}>Let `&apos;`s Go!</Button>
             </Container>
-
-        )
+        );
     }
 
 }

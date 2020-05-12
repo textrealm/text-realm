@@ -29,4 +29,3 @@ if (Ratings.find().count() === 0) {
     Meteor.settings.defaultRatings.map(data => addRating(data));
   }
 }
-

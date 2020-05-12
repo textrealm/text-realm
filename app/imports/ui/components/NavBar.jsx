@@ -20,12 +20,16 @@ class NavBar extends React.Component {
           ) : ''}
           {this.props.currentUser ? (
               [
-                  <Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Sell A Textbook</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>Search For Books</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/recentComments" key='recentComments'>User Reviews</Menu.Item>,
-                  <Menu.Item as={NavLink} activeClassName="active" exact to="/addComment" key='addComment'>Add A User Review</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to={`/profile/${this.props.currentId}`} key='profile'> My
-                  Profile </Menu.Item>,
+                  <Menu.Item as={NavLink} activeClassName="active" exact to="/add"
+                             key='add'>Sell A Textbook</Menu.Item>,
+                <Menu.Item as={NavLink} activeClassName="active" exact to="/list"
+                           key='list'>Search For Books</Menu.Item>,
+                <Menu.Item as={NavLink} activeClassName="active" exact to="/recentComments"
+                           key='recentComments'>User Reviews</Menu.Item>,
+                  <Menu.Item as={NavLink} activeClassName="active" exact to="/addComment"
+                             key='addComment'>Add A User Review</Menu.Item>,
+                <Menu.Item as={NavLink} activeClassName="active" exact to={`/profile/${this.props.currentId}`}
+                           key='profile'> My Profile </Menu.Item>,
               ]
           ) : ''}
           {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
@@ -41,7 +45,8 @@ class NavBar extends React.Component {
             ) : (
                 <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
                   <Dropdown.Menu>
-                    <Dropdown.Item icon="user" text="Profile" as={NavLink} exact to={`/profile/${this.props.currentId}`}/>
+                    <Dropdown.Item icon="user" text="Profile" as={NavLink}
+                                   exact to={`/profile/${this.props.currentId}`}/>
                     <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
                   </Dropdown.Menu>
                 </Dropdown>

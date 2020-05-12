@@ -11,16 +11,16 @@ class Reviews extends React.Component {
            <Card>
                <Card.Content>
                    <Image src={this.props.reviews.userImage} floated='right' size='mini' />
-                   <Card.Header>{this.props.reviews.userEmail}</Card.Header>
+                   <Card.Header>User {this.props.reviews.userEmail}</Card.Header>
+                   <Card.Header>
+                       just bought from: {this.props.reviews.toUser}!
+                   </Card.Header>
                    <Card.Meta>
                        <div>{this.props.reviews.postedAt.toLocaleDateString('en-US')}</div>
                        <div>
-                           Rating: {this.props.reviews.rating} <Icon name='star'/>
+                           Rating: {this.props.reviews.rating} <Icon name='star'/> out of 5
                        </div>
                    </Card.Meta>
-                   <Card.Content>
-                       Bought From: {this.props.reviews.toUser}
-                   </Card.Content>
                    <Card.Description>
                        {this.props.reviews.comment}
                    </Card.Description>
