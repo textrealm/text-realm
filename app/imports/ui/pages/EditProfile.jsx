@@ -6,8 +6,8 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import SimpleSchema from 'simpl-schema';
 import { UserInfo } from '../../api/userinfo/Userinfo';
-import SimpleSchema from "simpl-schema";
 
 const formSchema = new SimpleSchema({
   name: String,
@@ -56,7 +56,8 @@ class EditProfile extends React.Component {
   }
 }
 
-/** Require the presence of a UserInfo document in the props object. Uniforms adds 'model' to the props, which we use.*/
+/** Require the presence of a UserInfo document in the props object.
+ * Uniforms adds 'model' to the props, which we use. */
 EditProfile.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,

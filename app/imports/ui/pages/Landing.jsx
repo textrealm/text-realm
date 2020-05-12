@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Image, Header} from 'semantic-ui-react';
+import { Grid, Image, Header } from 'semantic-ui-react';
 
 /** Renders the Landing page. Snazzy. */
 class Landing extends React.Component {

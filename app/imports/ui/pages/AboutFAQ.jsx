@@ -26,7 +26,7 @@ class AboutFAQ extends React.Component {
                     <p>A: Click on the ‘Sell A Textbook!’ option in the menu bar, which will direct you to a page where
                         you must fill in the
                         required information about the textbook that you plan to sell. From there, you can find the
-                        seller's email to contact them. You must be logged in to be able to sell a textbook.</p>
+                        seller&apos;s email to contact them. You must be logged in to be able to sell a textbook.</p>
                     <p><b>Racial, sexual, or ay inappropriate slurs will not be tolerated, and users will be banned for
                         illegal/inappropriate behavior. This site is only to be used by students registered in the
                         UH system. </b></p>
