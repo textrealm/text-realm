@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { Book } from '../../api/book/Book';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a card component displaying a textbook preview for the owner of the book. See pages/Profile.jsx. */
 class TextbookEntry extends React.Component {
     removeItem(docID) {
         const check = confirm('Do you really want to delete this textbook entry?');

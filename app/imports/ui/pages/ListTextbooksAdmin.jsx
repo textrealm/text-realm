@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Book } from '../../api/book/Book';
 import TextbookEntry from '../components/TextbookEntry';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/** Renders all of the entries for the Admin. */
 class ListTextbooksAdmin extends React.Component {
 
     /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -20,15 +20,16 @@ class ListTextbooksAdmin extends React.Component {
             <Container>
                 <Header as="h2" textAlign="center" inverted>All Textbooks</Header>
                 <Card.Group>
-                    {this.props.book.map((book, index) => <TextbookEntry key={ index }
-                                                                                  book={ book }
+                    {this.props.book.map((book, index) => <TextbookEntry key={index}
+                                                                         book={book}
                     />)}
                 </Card.Group>
             </Container>
         );
     }
 }
-/** Require an array of Stuff documents in the props. */
+
+/** Require an array of Book documents in the props. */
 ListTextbooksAdmin.propTypes = {
     book: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,

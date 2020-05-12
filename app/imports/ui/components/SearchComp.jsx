@@ -3,7 +3,8 @@ import { Button, Container } from 'semantic-ui-react';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import { withRouter } from 'react-router-dom';
 
-
+/** Renders a search component so the user can search for a book based on author, ISBN, or title. 
+ * See pages/SearchComp.jsx. */
 export class SearchComp extends React.Component {
     result;
 

@@ -7,7 +7,7 @@ import { Ratings } from '../../api/rating/Rating';
 import Reviews from '../components/Reviews';
 
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/** Renders a page to display all comments from users about a buying experience. */
 export class RecentComments extends React.Component {
 
     /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -21,15 +21,16 @@ export class RecentComments extends React.Component {
             <Container>
                 <Header as="h2" textAlign="center" inverted>Recent Comments</Header>
                 <Card.Group>
-                    {this.props.reviews.map((reviews, index) => <Reviews key={ index }
-                                                                         reviews={ reviews }
+                    {this.props.reviews.map((reviews, index) => <Reviews key={index}
+                                                                         reviews={reviews}
                     />)}
                 </Card.Group>
             </Container>
         );
     }
 }
-/** Require an array of Stuff documents in the props. */
+
+/** Require an array of Ratings documents in the props. */
 RecentComments.propTypes = {
     reviews: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,

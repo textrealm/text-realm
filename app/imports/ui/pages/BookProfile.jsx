@@ -6,10 +6,12 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Book } from '../../api/book/Book';
 import { UserInfo } from '../../api/userinfo/Userinfo';
 
+/** Renders the Page for displaying a textbook entry. */
 class BookProfile extends React.Component {
     render() {
         return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
     }
+
     renderPage() {
         return (
             <Container>
@@ -18,7 +20,7 @@ class BookProfile extends React.Component {
                     <Grid.Column width={8}>
                         <Card fluid>
                             <Image src={this.props.book.image}
-                                   floated='left' size='huge' />
+                                   floated='left' size='huge'/>
                         </Card>
                     </Grid.Column>
                     <Grid.Column width={8}>
@@ -50,7 +52,7 @@ class BookProfile extends React.Component {
                                 <br/>
                             </Card.Content>
                             <Card.Content extra>
-                              Interested? Contact the seller at: <b>{this.props.book.owner}</b>
+                                Interested? Contact the seller at: <b>{this.props.book.owner}</b>
                             </Card.Content>
                         </Card>
                     </Grid.Column>
@@ -67,7 +69,7 @@ BookProfile.propTypes = {
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withTracker(( { match }) => {
+export default withTracker(({match}) => {
     const documentId = match.params._id;
     const subscription = Meteor.subscribe('Book');
     const useSub = Meteor.subscribe('UserInfo');
