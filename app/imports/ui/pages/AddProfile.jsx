@@ -23,7 +23,7 @@ class AddProfile extends React.Component {
   submit(data, formRef) {
     const { name, email, id, image, description } = data;
     const owner = Meteor.user().username;
-    UserInfo.insert({ name, email, id, image, description },
+    UserInfo.insert({ name, email, id, image, description, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -44,10 +44,10 @@ class AddProfile extends React.Component {
             <AutoForm ref={ref => { fRef = ref; }} schema={formSchema} onSubmit={data => this.submit(data, fRef)} >
               <Segment>
                 <TextField name='name'/>
-				<TextField name='email'/>
+                <TextField name='email'/>
                 <NumField name='id' decimal={false}/>
-				<TextField name='image'/>
-				<TextField name='description'/>
+                <TextField name='image'/>
+                <TextField name='description'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>
