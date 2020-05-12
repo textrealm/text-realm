@@ -20,10 +20,10 @@ const BookSchema = new SimpleSchema({
         allowedValues: ['excellent', 'good', 'fair', 'poor'],
         defaultValue: 'good',
     },
-}, {tracker: Tracker});
+}, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
 Book.attachSchema(BookSchema);
 
 /** Make the collection and schema available to other code. */
-export {Book, BookSchema};
+export { Book, BookSchema };

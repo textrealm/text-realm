@@ -13,10 +13,10 @@ const UserInfoSchema = new SimpleSchema({
     image: String,
     description: String,
     owner: String,
-}, {tracker: Tracker});
+}, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
 UserInfo.attachSchema(UserInfoSchema);
 
 /** Make the collection and schema available to other code. */
-export {UserInfo, UserInfoSchema};
+export { UserInfo, UserInfoSchema };
