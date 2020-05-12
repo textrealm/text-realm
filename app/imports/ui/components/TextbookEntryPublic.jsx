@@ -3,7 +3,7 @@ import { Image, Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a public preview of a textbook entry card. See pages/SearchComp.jsx. */
 class TextbookEntryPublic extends React.Component {
     render() {
         return (
@@ -41,7 +41,7 @@ class TextbookEntryPublic extends React.Component {
 }
 
 TextbookEntryPublic.propTypes = {
-   book: PropTypes.object.isRequired,
+    book: PropTypes.object.isRequired,
 };
 
 export default withRouter(TextbookEntryPublic);

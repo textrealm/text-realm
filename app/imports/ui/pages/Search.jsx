@@ -8,12 +8,13 @@ import { Book } from '../../api/book/Book';
 import TextbookEntryPublic from '../components/TextbookEntryPublic';
 import SearchComp from '../components/SearchComp';
 
-/** Renders the Profile Collection as a set of Cards. */
+/** Renders the Searh page with the search component and displays the results. See /components/SearchComp.jsx */
 class Search extends React.Component {
     getBooks;
+
     constructor(props) {
         super(props);
-        this.state = { chosen: 'title' };
+        this.state = {chosen: 'title'};
         this.getBooks = {};
     }
 
@@ -24,16 +25,18 @@ class Search extends React.Component {
         };
         this.setState(newState);
         this.search = search;
-        let lowerSearch = search.toLowerCase();
-        this.getBooks = _.filter(this.props.books, function(object) {
-            if (object["title"].toLowerCase().includes(lowerSearch)) {
-                return object["title"].toLowerCase().includes(lowerSearch);
-            } else if (object["author"].toLowerCase().includes(lowerSearch)) {
-                return object["author"].toLowerCase().includes(lowerSearch);
-            }  else if (object["ISBN"] === parseInt(search)) {
+        let check = search.toLowerCase();
+        this.getBooks = _.filter(this.props.books, function (object) {
+            if (object["title"].toLowerCase().includes(check)) {
+                return object["title"].toLowerCase().includes(check);
+            } else if (object["author"].toLowerCase().includes(check)) {
+                return object["author"].toLowerCase().includes(check);
+            } else if (object["ISBN"] === parseInt(search)) {
                 return object["ISBN"];
-            }});
+            }
+        });
     };
+
     /** On successful submit, search for data. */
 
     /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -41,29 +44,30 @@ class Search extends React.Component {
         return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
     }
 
-    /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+    /** Render the page with results. Use Uniforms: https://github.com/vazco/uniforms */
     renderPage() {
         return (
             <Container>
                 <Header as="h1" inverted textAlign="center">Search For Books</Header>
-                <Header as ="h2" inverted textAlign="center">Search for textbooks based on author, ISBN, or title.</Header>
-                    <Grid container centered style={{ margin: '50px' }}>
-                         <SearchComp send={this.bookSearch.bind(this)}/>
-                    </Grid>
+                <Header as="h2" inverted textAlign="center">Search for textbooks based on author, ISBN, or
+                    title.</Header>
+                <Grid container centered style={{margin: '50px'}}>
+                    <SearchComp send={this.bookSearch.bind(this)}/>
+                </Grid>
 
-                { this.state.chosen === 'title' ? (
+                {this.state.chosen === 'title' ? (
                     <Card.Group> {this.props.books.map((book, index) => <TextbookEntryPublic key={index}
-                                                                                  book={book}/>)}</Card.Group>
-                ) : ( this.getBooks.length === 0 ? (<Header inverted as="h2" textAlign="center">No results.</Header>) :
-                    <Card.Group> { this.getBooks.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
-                    </Card.Group> )
+                                                                                             book={book}/>)}</Card.Group>
+                ) : (this.getBooks.length === 0 ? (<Header inverted as="h2" textAlign="center">No results.</Header>) :
+                    <Card.Group> {this.getBooks.map((book, index) => <TextbookEntryPublic key={index} book={book}/>)}
+                    </Card.Group>)
                 }
             </Container>
         );
     }
 }
 
-/** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
+/** Require the presence of a Book document in the props object. Uniforms adds 'model' to the props, which we use. */
 Search.propTypes = {
     books: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,

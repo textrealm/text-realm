@@ -9,11 +9,13 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import Search from '../pages/Search';
 import ListTextbooksAdmin from '../pages/ListTextbooksAdmin';
-import BookProfile from "../pages/BookProfile";
+import BookProfile from '../pages/BookProfile';
 import SellATextbook from '../pages/SellATextbook';
+import AddComment from '../pages/AddComment';
 import EditEntry from '../pages/EditEntry';
 import Profile from '../pages/Profile';
 import EditProfile from '../pages/EditProfile';
+import RecentComments from '../pages/RecentComments';
 import AboutFAQ from '../pages/AboutFAQ';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -38,7 +40,9 @@ class App extends React.Component {
               <ProtectedRoute path="/editBook/:_id" component={EditEntry}/>
               <ProtectedRoute path="/bookProfile/:_id" component={BookProfile}/>
               <ProtectedRoute path="/profile" component={Profile}/>
+              <ProtectedRoute path="/addComment" component={AddComment}/>
               <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
+              <ProtectedRoute path="/recentComments" component={RecentComments}/>
               <AdminProtectedRoute path="/admin" component={ListTextbooksAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>

@@ -9,13 +9,13 @@ body {
 }
 
 .margin-message {
-  margin-top: 20px;
-  margin-bottom: 240px;
-  width: 100%;
+    margin-top: 20px;
+    margin-bottom: 240px;
+    width: 100%;
 }
 
 .manoa-bg {
-  background-image: url('/images/uh-manoa-campus-center.jpg') !important;
+    background-image: url('/images/uh-manoa-campus-center.jpg') !important;
 }
 
 .manoa-green {
@@ -24,8 +24,8 @@ body {
 }
 
 .signup-margin-message {
-  margin-top: 20px;
-  margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .profile-back {
