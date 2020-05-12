@@ -8,7 +8,7 @@ import Reviews from '../components/Reviews';
 
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class RecentComments extends React.Component {
+export class RecentComments extends React.Component {
 
     /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
     render() {
@@ -21,8 +21,8 @@ class RecentComments extends React.Component {
             <Container>
                 <Header as="h2" textAlign="center" inverted>Recent Comments</Header>
                 <Card.Group>
-                    {this.props.comments.map((rating, index) => <Reviews key={ index }
-                                                                         rating={ rating }
+                    {this.props.reviews.map((reviews, index) => <Reviews key={ index }
+                                                                         reviews={ reviews }
                     />)}
                 </Card.Group>
             </Container>
@@ -31,7 +31,7 @@ class RecentComments extends React.Component {
 }
 /** Require an array of Stuff documents in the props. */
 RecentComments.propTypes = {
-    comments: PropTypes.array.isRequired,
+    reviews: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
 
@@ -40,7 +40,7 @@ export default withTracker(() => {
     // Get access to user comments' documents.
     const subscription = Meteor.subscribe('Ratings');
     return {
-        comments: Ratings.find({}).fetch(),
+        reviews: Ratings.find({}).fetch(),
         ready: subscription.ready(),
     };
 })(RecentComments);

@@ -9,7 +9,7 @@ import SimpleSchema from 'simpl-schema';
 
 const formSchema = new SimpleSchema({
   userEmail: { type: String, label: 'Name:' },
-  userImage: { type: String, label: 'User Image:' },
+  userImage: { type: String, label: 'Reviewer Image:' },
   toUser: { type: String, label: 'Review For:'},
   comment: String,
   rating: { type: Number, label: 'Rating:', min: 0, max: 5},

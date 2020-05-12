@@ -1,46 +1,60 @@
 {
   "defaultAccounts": [
-    { "email": "john@foo.com", "password": "changeme" },
-    { "email": "mary@foo.com", "password": "changeme" },
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" }
-  ],
-
-  "defaultBooks": [
     {
-      "title":  "Introduction to Algorithms, 3rd Edition",
-      "ISBN":  "99988827",
-      "image":  "https://images-na.ssl-images-amazon.com/images/I/513P8XoCAEL._AC_UL600_SR453,600_.jpg",
-      "author":  "Thomas Cormen",
-      "owner":  "mary@foo.com",
-      "cost":  "100",
-      "yearPublished": "1989",
-      "description": "A very useful book for all computer scientists.",
-      "condition":  "good"
+      "email": "john@foo.com",
+      "password": "changeme"
+    },
+    {
+      "email": "mary@foo.com",
+      "password": "changeme"
+    },
+    {
+      "email": "admin@foo.com",
+      "password": "changeme",
+      "role": "admin"
+    },
+    {
+      "email": "secruz@hawaii.edu",
+      "password": "changeme",
+      "role": "admin"
     }
   ],
-
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-    ],
-
+  "defaultBooks": [
+    {
+      "title": "Introduction to Algorithms, 3rd Edition",
+      "ISBN": "99988827",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/513P8XoCAEL._AC_UL600_SR453,600_.jpg",
+      "author": "Thomas Cormen",
+      "owner": "mary@foo.com",
+      "cost": "100",
+      "yearPublished": "1989",
+      "description": "A very useful book for all computer scientists.",
+      "condition": "good"
+    }
+  ],
   "defaultProfile": [
     {
       "name": "Admin",
-      "email":  "admin@foo.com",
+      "email": "admin@foo.com",
       "id": "11111111",
       "image": "https://react.semantic-ui.com/images/wireframe/image.png",
       "description": "Welcome to the TextRealm community!",
       "owner": "admin@foo.com"
     },
     {
+      "name": "Sophia Cruz",
+      "email": "secruz@hawaii.edu",
+      "id": "25566731",
+      "image": "https://react.semantic-ui.com/images/wireframe/image.png",
+      "description": "Welcome to the TextRealm community! Don't forget to read the About/FAQ!",
+      "owner": "secruz@hawaii.edu"
+    },
+    {
       "name": "John",
       "email": "john@foo.com",
       "id": "9682228",
       "image": "https://react.semantic-ui.com/images/wireframe/image.png",
-      "description": "I am a student",
+      "description": "Electrical Engineering major in need of books that won't cost me a kidney.",
       "owner": "john@foo.com"
     },
     {
@@ -48,7 +62,7 @@
       "email": "mary@foo.com",
       "id": "999999",
       "image": "https://react.semantic-ui.com/images/wireframe/image.png",
-      "description": "I am a student",
+      "description": "I am a student who is in need of some cheap textbooks. I am majoring in Biology. Go bows!",
       "owner": "mary@foo.com"
     }
   ],
@@ -56,11 +70,10 @@
     {
       "userEmail": "john@foo.com",
       "userImage": "https://react.semantic-ui.com/images/wireframe/image.png",
-      "toUser" : "mary@foo.com",
-      "comment": "Bought from them before. They are really nice!",
+      "toUser": "mary@foo.com",
+      "comment": "Bought from them before since I really needed a calculus textbook.",
       "rating": 4,
-      "postedAt": "Sun May 10 2020 20:00:32 GMT-1000 (Hawaii-Aleutian Standard Time)",
-      "owner": "john@foo.com"
+      "postedAt": "Sat May 10 2020 20:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     }
   ]
 }

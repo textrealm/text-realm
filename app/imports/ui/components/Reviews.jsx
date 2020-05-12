@@ -31,7 +31,7 @@ class Reviews extends React.Component {
 }
 
 Reviews.propTypes = {
-    reviews: PropTypes.object,
+    reviews: PropTypes.object.isRequired,
 };
 
 export default withRouter(Reviews);
