@@ -1,49 +1,70 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Grid, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
-import { UserInfo } from "../../api/userinfo/Userinfo";
+import { Meteor } from 'meteor/meteor';
+import { UserInfo } from '../../api/userinfo/Userinfo';
+import { Book } from '../../api/book/Book';
+import TextbookEntry from '../components/TextbookEntry';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class Profile extends React.Component {
 
-  render() {
+    render() {
+        return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+    }
+
+  renderPage() {
     return (
-        <Card centered>
-            <Image
-                floated='left'
-                size='medium'
-                src={this.props.userinfo.image}
-            />
-          <Card.Content>
-            <Card.Header>Name: {this.props.userinfo.name} </Card.Header>
-            <Card.Meta>Email: {this.props.userinfo.email}</Card.Meta>
-			<Card.Meta>UH ID Number: {this.props.userinfo.id}</Card.Meta>
-            <Card.Description>
-              Description: {this.props.userinfo.description}
-            </Card.Description>
-          </Card.Content>
-		  <Card.Content extra>
-            <Link to={`/edit/${this.props.userinfo._id}`}>Edit</Link>
-          </Card.Content>
-        </Card>
+        <Grid className="profile-back">
+            <Grid container>
+                <Card centered fluid>
+                    <Card.Content>
+                        <Image
+                            floated='right'
+                            size='medium'
+                            src={this.props.userInfo.image}
+                        />
+                        <Card.Header>{this.props.userInfo.name} </Card.Header>
+                        <Card.Meta>Email: {this.props.userInfo.email}</Card.Meta>
+                        <Card.Meta>UH ID Number: {this.props.userInfo.id}</Card.Meta>
+                        <Card.Meta>
+                            {this.props.userInfo.description}
+                        </Card.Meta>
+                    </Card.Content>
+                    <Card.Content extra>
+                        <Link to={`/edit/${this.props.userInfo._id}`}>Edit</Link>
+                    </Card.Content>
+                </Card>
+                <Card.Group centered>
+                    {this.props.books.map((book, index) => <TextbookEntry
+                        key={index}
+                        book={book}
+                    />)}
+                </Card.Group>
+            </Grid>
+        </Grid>
     );
   }
 }
 /** Require a document to be passed to this component. */
 Profile.propTypes = {
-    userinfo: PropTypes.object.isRequired,
+    userInfo: PropTypes.object,
+    books: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withTracker(() => {
+export default withTracker(({ match }) => {
     // Get access to Book documents.
+    const userId = match.params._id;
+    const getUser = Meteor.users.findOne(userId);
     const subscription = Meteor.subscribe('UserInfo');
-
+    const bookSub = Meteor.subscribe('UserBook');
     return {
-        userinfo: UserInfo.find({}).fetch(),
-        ready: subscription.ready(),
+        userInfo: UserInfo.findOne({ username: getUser }),
+        books: Book.find({ username: getUser }).fetch(),
+        ready: subscription.ready() && bookSub.ready(),
     };
 })(Profile);

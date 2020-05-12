@@ -1,12 +1,12 @@
 import React from 'react';
 import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, NumField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, LongTextField, NumField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { UserInfo, UserInfoSchema } from '../../api/userinfo/Userinfo';
+import { UserInfo } from '../../api/userinfo/Userinfo';
 import SimpleSchema from "simpl-schema";
 
 const formSchema = new SimpleSchema({
@@ -35,16 +35,16 @@ class EditProfile extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
     return (
-        <Grid container centered>
+        <Grid container inverted centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Edit Profile</Header>
+            <Header as="h2" inverted textAlign="center">Edit Profile</Header>
             <AutoForm schema={ formSchema } onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='name'/>
 				<TextField name='email'/>
                 <NumField name='id' decimal={false}/>
 				<TextField name='image'/>
-				<TextField name='description'/>
+				<LongTextField name='description'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>

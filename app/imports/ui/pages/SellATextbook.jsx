@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
@@ -9,11 +9,12 @@ import { Book } from '../../api/book/Book';
 
 const formSchema = new SimpleSchema({
   title: String,
-  ISBN: Number,
+  ISBN: { type: Number, label: 'ISBN' },
   image: String,
   author: String,
   cost: { type: Number, min: 0 },
-  yearPublished: String,
+  description: String,
+  yearPublished: { type: Number, label: 'Year Published', min: 0 },
   condition: {
     type: String,
     allowedValues: ['excellent', 'good', 'fair', 'poor'],
@@ -26,9 +27,9 @@ class SellATextbook extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { title, ISBN, image, author, cost, yearPublished, condition } = data;
+    const { title, ISBN, image, author, cost, yearPublished, description, condition } = data;
     const owner = Meteor.user().username;
-    Book.insert({ title, ISBN, image, author, cost, yearPublished, condition, owner },
+    Book.insert({ title, ISBN, image, author, cost, yearPublished, description, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -46,7 +47,7 @@ class SellATextbook extends React.Component {
     return (
         <Grid style={addStyle} container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Sell A Textbook</Header>
+            <Header as="h2" inverted textAlign="center">Sell A Textbook</Header>
             <AutoForm ref={ref => { fRef = ref; }} schema={ formSchema } onSubmit={data => this.submit(data, fRef)} >
               <Segment>
                 <TextField name='title'/>
@@ -55,6 +56,7 @@ class SellATextbook extends React.Component {
                 <TextField name='author'/>
                 <TextField name='image'/>
                 <TextField name='yearPublished'/>
+                <LongTextField name='description'/>
                 <SelectField name='condition'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>

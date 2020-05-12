@@ -19,10 +19,11 @@ class NavBar extends React.Component {
               <Menu.Item as={NavLink} activeClassName="" exact to="/about"> About/FAQ </Menu.Item>
           ) : ''}
           {this.props.currentUser ? (
-              [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Sell A Textbook</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List
-                  Textbooks</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/profile" key='profile'> My
+              [
+                  <Menu.Item as={NavLink} activeClassName="active" exact to="/about"> About/FAQ </Menu.Item>,
+                  <Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Sell A Textbook</Menu.Item>,
+                <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Results</Menu.Item>,
+                <Menu.Item as={NavLink} activeClassName="active" exact to={`/profile/${this.props.currentId}`} key='profile'> My
                   Profile </Menu.Item>,
               ]
           ) : ''}
@@ -32,16 +33,14 @@ class NavBar extends React.Component {
           ) : ''}
           <Menu.Item position="right">
             {this.props.currentUser === '' ? (
-                [<Menu.Item key='search'>
-                  <Input icon='search' placeholder='Search'/>
-                </Menu.Item>,
+                [
                   <Menu.Item key='login' as={NavLink} exact to="/signin"> Login </Menu.Item>,
                   <Menu.Item key='signup' as={NavLink} exact to="/signup">Sign
                     Up</Menu.Item>]
             ) : (
                 <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
                   <Dropdown.Menu>
-                    <Dropdown.Item icon="sign out" text="Profile" as={NavLink} exact to="/signout"/>
+                    <Dropdown.Item icon="user" text="Profile" as={NavLink} exact to={`/profile/${this.props.currentId}`}/>
                     <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -55,11 +54,13 @@ class NavBar extends React.Component {
 /** Declare the types of all properties. */
 NavBar.propTypes = {
   currentUser: PropTypes.string,
+  currentId: PropTypes.string,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 const NavBarContainer = withTracker(() => ({
   currentUser: Meteor.user() ? Meteor.user().username : '',
+  currentId: Meteor.userId(),
 }))(NavBar);
 
 /** Enable ReactRouter for this component. https://reacttraining.com/react-router/web/api/withRouter */

@@ -5,9 +5,9 @@ import { Grid } from 'semantic-ui-react';
 class AboutFAQ extends React.Component {
   render() {
     return (
-        <Grid verticalAlign='middle' textAlign='center' container>
+        <Grid verticalAlign='middle' textAlign='center' className='manoa-green'>
 
-          <Grid.Column>
+          <Grid.Column centered width={9}>
             <h1>About</h1>
             <p>TextRealm is an application which allows UHM students to avoid the hassle of buying and selling textbooks
             from the bookstore, and allows students to buy and sell their textbooks directly with other UHM students
@@ -20,7 +20,7 @@ class AboutFAQ extends React.Component {
                 <h2>Q: How do I sell my textbooks?</h2>
 
 <p>A: Click on the ‘Sell A Textbook!’ option in the menu bar, which will direct you to a page where you must fill in the
-required information about the textbook that you plan to sell. You must be logged in to be able to sell a textbook.</p>
+required information about the textbook that you plan to sell. From there, you can find the seller's email to contact them. You must be logged in to be able to sell a textbook.</p>
 
           </Grid.Column>
         </Grid>

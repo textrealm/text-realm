@@ -7,8 +7,9 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListTextbooks from '../pages/ListTextbooks';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import Search from '../pages/Search';
+import ListTextbooksAdmin from '../pages/ListTextbooksAdmin';
+import BookProfile from "../pages/BookProfile";
 import SellATextbook from '../pages/SellATextbook';
 import EditEntry from '../pages/EditEntry';
 import Profile from '../pages/Profile';
@@ -31,12 +32,14 @@ class App extends React.Component {
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
               <Route path="/about" component={AboutFAQ}/>
-              <ProtectedRoute path="/list" component={ListTextbooks}/>
+                <Route path="/about-in" component={AboutFAQ}/>
+              <ProtectedRoute path="/list" component={Search}/>
               <ProtectedRoute path="/add" component={SellATextbook}/>
               <ProtectedRoute path="/editBook/:_id" component={EditEntry}/>
+              <ProtectedRoute path="/bookProfile/:_id" component={BookProfile}/>
               <ProtectedRoute path="/profile" component={Profile}/>
               <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+              <AdminProtectedRoute path="/admin" component={ListTextbooksAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>

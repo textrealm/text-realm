@@ -1,5 +1,5 @@
 body {
-    background-image: url('/images/uh-manoa-campus-center.jpg') !important;
+    background-color: #3B7A57 !important;
     background-size: auto;
     height: 100%;
 }
@@ -14,8 +14,13 @@ body {
   width: 100%;
 }
 
+.manoa-bg {
+  background-image: url('/images/uh-manoa-campus-center.jpg') !important;
+}
+
 .manoa-green {
-  background-color: #3B7A57 !important;
+    background-color: #3B7A57 !important;
+    color: white !important;
 }
 
 .signup-margin-message {
@@ -23,3 +28,11 @@ body {
   margin-bottom: 20px;
 }
 
+.profile-back {
+    background-color: #3B7A57 !important;
+    margin: 50px;
+}
+
+.search-bar {
+    background-color: #3B7A57 !important;
+}

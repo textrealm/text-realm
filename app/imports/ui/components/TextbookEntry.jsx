@@ -1,26 +1,30 @@
 import React from 'react';
-import {Image, Card, Button, Confirm, Popup} from 'semantic-ui-react';
+import { Image, Card, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import {withTracker} from 'meteor/react-meteor-data';
+import { withRouter, Link } from 'react-router-dom';
 import { Book } from "../../api/book/Book";
-import { UserInfo } from "../../api/userinfo/Userinfo";
+import swal from 'sweetalert';
+import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class TextbookEntry extends React.Component {
-    deleteEntry(id) {
-        Book.delete(id);
-        this.setState({click: false});
+    removeItem(docID) {
+        let check = confirm("Do you really want to delete this textbook entry?");
+        if (check === true) {
+            Book.remove(docID);
+            swal('Success', 'Entry deleted successfully', 'success');
+        } else {
+            swal('Error', error.message, 'error');
+        }
     }
-    state = { click: false };
-    hasClicked = () => this.setState({ click: true });
-    closed = () => this.setState({ click: false });
     render() {
         return (
             <Card>
-                <Image src='https://en.wikipedia.org/wiki/Introduction_to_Algorithms#/media/File:Clrs3.jpeg'
-                       floated='left' size='large'/>
                 <Card.Content>
+                    <Card.Content>
+                        <Image src={this.props.book.image} width='350px' height='350px'/>
+                    </Card.Content>
+                    <br/>
                     <Card.Header>
                         {this.props.book.title}
                     </Card.Header>
@@ -29,14 +33,6 @@ class TextbookEntry extends React.Component {
                         Author(s): {this.props.book.author}
                     </Card.Meta>
                     <br/>
-                    <Card.Description>
-                        <Popup>
-                            content: {this.props.book.description}
-                            on='click'
-                            trigger={<Button content='View More' />}
-                        </Popup>
-                    </Card.Description>
-                    <br/>
                     <Card.Meta>
                         Cost: {this.props.book.cost}
                     </Card.Meta>
@@ -44,37 +40,28 @@ class TextbookEntry extends React.Component {
                     <Card.Meta>
                         Condition: {this.props.book.condition}
                     </Card.Meta>
+                    <br/>
                     <Card.Meta>
                         Year Published: {this.props.book.yearPublished}
                     </Card.Meta>
-                    <Card.Content extra>
-                        <Link to={`/editBook/${this.props.userinfo._id}`}>Edit</Link>
-                    </Card.Content>
+                    <br/>
                 </Card.Content>
-
-                {/*<Card.Content extra>*/}
-                {/*    <Book owner={this.props.book.owner} contactId={this.props.book._id}/>*/}
-                {/*</Card.Content>*/}
+                <Card.Content extra>
+                    <Button basic color='green'>
+                        <Link to={`/editBook/${this.props.book._id}`}>Edit</Link>
+                    </Button>
+                    <Button basic color='red'
+                            onClick={() => this.removeItem(this.props.book._id)}>
+                        Delete
+                    </Button>
+                </Card.Content>
             </Card>
         );
     }
 }
 
-/** Require a document to be passed to this component. */
 TextbookEntry.propTypes = {
-    book: PropTypes.array.isRequired,
-    userinfo: PropTypes.array.isRequired,
-    ready: PropTypes.bool.isRequired
+   book: PropTypes.object.isRequired,
 };
 
-/** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withTracker(() => {
-    // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-    const subscription = Meteor.subscribe('Book');
-    const usersub = Meteor.subscribe('UserInfo');
-    return {
-        book: Book.find({}).fetch(),
-        userinfo: UserInfo.find({}).fetch(),
-        ready: subscription.ready() && usersub.ready(),
-    };
-})(TextbookEntry);
+export default withRouter(TextbookEntry);
